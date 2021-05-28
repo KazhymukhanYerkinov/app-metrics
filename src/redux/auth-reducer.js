@@ -12,6 +12,7 @@ let inititalState = {
 
 
 
+
 const authReducer = (state = inititalState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
