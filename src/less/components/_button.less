@@ -1,0 +1,28 @@
+@import '../_variables.less';
+
+.button {
+    font-size: 14px;
+    line-height: 19px;
+    font-weight: 600;
+    font-size: 'Open Sans';
+    color: @white;
+    border: none;
+    border-radius: 3px;
+
+    background-color: @blue;
+    transition: background-color .3s linear;
+    cursor: pointer;
+
+    &:hover {
+        background-color: @blue_hover;
+    }
+    &__submit {
+        width: 200px;
+        height: 45px;
+
+        @media (max-width: @tablet-width) {
+            width: 130px;
+            height: 40px;
+        }
+    }
+}

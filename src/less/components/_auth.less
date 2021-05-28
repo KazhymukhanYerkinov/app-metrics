@@ -1,0 +1,63 @@
+@import '../_variables.less';
+
+.auth {
+    display: flex;
+
+    &__first-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 55%;
+        min-height: 100vh;
+
+        background-color: @gray_1;
+
+        @media (max-width: @tablet-width) {
+            display: none;
+        }
+    }
+
+    &__logo {
+        width: 35%;
+        display: block;
+        height: auto;
+    }
+
+    &__second-content {
+        padding: 0 15px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 45%;
+        background-color: @white;
+
+        @media (max-width: @tablet-width) {
+            width: 100%;
+            min-height: 100vh;
+        }
+    }
+
+    &__error {
+        margin-top: 5px;
+
+        font-size: 12px;
+        line-height: 15px;
+        font-weight: 500;
+
+        color: @error-color;
+    }
+
+    &__footer {
+        margin-top: 15px;
+        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+
+}
