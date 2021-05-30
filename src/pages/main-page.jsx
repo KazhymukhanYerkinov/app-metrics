@@ -5,6 +5,7 @@ const Main = () => {
   return (
     <div>
       Welcome to Main Page
+      {/* Yernar тут был */}
     </div>
   )
 }
