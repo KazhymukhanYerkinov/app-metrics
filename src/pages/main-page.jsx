@@ -6,6 +6,7 @@ const Main = () => {
     <div>
       {/* yernar Branch  */}
       Welcome to Main Page
+      {/* Yernar тут был */}
     </div>
   )
 }
