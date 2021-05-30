@@ -5,7 +5,7 @@ import { Route } from "react-router";
 
 import './App.less'
 
-
+// ALMAZ BYL TUT
 
 const App = () => {
     return (
