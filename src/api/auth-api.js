@@ -9,4 +9,8 @@ export const authAPI = {
   register(username, email, password1, password2) {
     return instance.post('auth/registration/', { username, email, password1, password2 }).then(response => response.data);
   },
+
+  user() {
+    return instance.get('auth/user/').then(response => response.data);
+  }
 }

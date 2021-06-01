@@ -1,14 +1,17 @@
 import React from 'react';
+
+// npm packets
 import * as Yup from 'yup';
 import cls from 'classnames';
 import { Field, Form, Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink, Redirect } from 'react-router-dom';
+
+// handmade packets
+import { registration } from '@redux/auth-reducer';
+import { selectIsAuth } from 'src/selectors/auth-selector';
 
 import logo from '@assets/logo.svg';
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { registration } from '@redux/auth-reducer';
-
-
 
 
 const validationSchema = Yup.object().shape({
@@ -22,24 +25,26 @@ const validationSchema = Yup.object().shape({
     .required('Поле, обязательное для заполнения'),
 
   password1: Yup.string()
-    .min(3, 'Минимальная длина 2 символов')
+    .min(8, 'Минимальная длина 8 символов')
     .max(100, 'Максимальная длина 100 символов')
     .required('Поле, обязательное для заполнения'),
 
   password2: Yup.string()
-    .min(3, 'Минимальная длина 2 символов')
-    .max(100, 'Максимальная длина 100 символов')
-    .required('Поле, обязательное для заполнения')
+    .oneOf([Yup.ref('password1'), null], 'Пароли не совпадают')
 })
 
 
 const Register = () => {
 
   const dispatch = useDispatch();
-
+  const isAuth = useSelector(selectIsAuth);
 
   const onSubmit = (data, actions) => {
     dispatch(registration(data.username, data.email, data.password1, data.password2, actions));
+  }
+
+  if (isAuth) {
+    return <Redirect to = '/' />
   }
 
   return (
@@ -111,7 +116,7 @@ const Register = () => {
               </div>
 
               <div className='auth__footer'>
-                <button type='submit' className='button button__submit' disabled={isSubmitting}> Создать </button>
+                <button type='submit' className='button button__submit' disabled={isSubmitting}> {isSubmitting ? 'Загрузка...': 'Создать'} </button>
                 <div className='form__link'> Уже есть аккаунт? <NavLink to='/login' className='form__link--blue'>Log in</NavLink> </div>
               </div>
 

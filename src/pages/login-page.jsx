@@ -1,13 +1,17 @@
 import React from 'react';
+
+// npm packets
 import * as Yup from 'yup';
 import cls from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Redirect } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import { NavLink, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+// handmade packets
+import { login } from '@redux/auth-reducer';
+import { selectIsAuth } from 'src/selectors/auth-selector';
 
 import logo from '@assets/logo.svg';
-import { login } from '@redux/auth-reducer';
-
 
 
 export const validationSchema = Yup.object().shape({
@@ -23,15 +27,15 @@ export const validationSchema = Yup.object().shape({
 
 
 const Login = () => {
+
   const dispatch = useDispatch();
-  const isAuth = useSelector(({ auth }) => auth.isAuth);
+  const isAuth = useSelector(selectIsAuth);
 
   if (isAuth) {
     return <Redirect to='/' />
   }
 
   const onSubmit = (data, actions) => {
-    console.log(data);
     dispatch(login(data.email, data.password1, actions));
   }
 
@@ -53,7 +57,6 @@ const Login = () => {
           {({ isSubmitting, errors, touched }) => (
             <Form className='form'>
 
-
               <div className='form__title'> Войти </div>
 
               { errors.global_error && <div className='auth__error'> {errors.global_error} </div>}
@@ -67,7 +70,6 @@ const Login = () => {
                 />
                 {errors.email && touched.email && (<div className='auth__error'> { errors.email} </div>)}
               </div>
-
 
               <div className='form__group'>
                 <label className='input__label' htmlFor='password'> Пароль </label>

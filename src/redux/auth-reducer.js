@@ -1,26 +1,42 @@
 import Cookie from 'js-cookie';
 import { authAPI } from "@api/auth-api";
 
-const LOGIN_SUCCESS = 'auth-reducer/LOGIN_SUCCESS';
-const LOGIN_FAIL = 'auth-reducer/LOGIN_FAIL';
+const AUTHENTICATED_SUCCESS = 'auth-reducer/AUTHENTICATED_SUCCESS';
+const AUTHENTICATED_FAIL = 'auth-reducer/AUTHENTICATED_FAIL';
 
-let inititalState = {
+const LOAD_USER_SUCCESS = 'auth-reducer/LOAD_USER_SUCCESS';
+const LOAD_USER_FAIL = 'auth-reducer/LOAD_USER_FAIL';
+
+
+let initialState = {
   access: Cookie.get('access'),
   isAuth: false,
   user: {},
 }
 
 
-const authReducer = (state = inititalState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case AUTHENTICATED_SUCCESS:
       return {
         ...state,
         isAuth: true,
         access: action.access
       }
 
-    case LOGIN_FAIL:
+    case LOAD_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.user
+      }
+    
+    case LOAD_USER_FAIL:
+      return {
+        ...state,
+        user: null
+      }
+
+    case AUTHENTICATED_FAIL:
       Cookie.remove('access');
       return {
         ...state,
@@ -33,10 +49,24 @@ const authReducer = (state = inititalState, action) => {
   }
 }
 
+export const loadUser = () => async (dispatch) => {
+  if (Cookie.get('access')) {
+
+    try {
+      let data = await authAPI.user();
+      dispatch({ type: LOAD_USER_SUCCESS, user: data.user })
+    } catch (error) {
+      dispatch({ type: LOAD_USER_FAIL });
+    }
+
+  } else {
+    dispatch({ type: LOAD_USER_FAIL });
+  }
+}
 
 export const login = (email, password, actions) => async (dispatch) => {
   try {
-    
+
     // send login API request
     let data = await authAPI.login(email, password);
 
@@ -47,7 +77,7 @@ export const login = (email, password, actions) => async (dispatch) => {
     actions.setSubmitting(false);
 
     // save data to the state
-    dispatch({ type: LOGIN_SUCCESS, access: data.access_token});
+    dispatch({ type: AUTHENTICATED_SUCCESS, access: data.access_token });
 
   } catch (error) {
 
@@ -58,7 +88,7 @@ export const login = (email, password, actions) => async (dispatch) => {
     actions.setFieldError('global_error', 'Введен неправильный email или пароль, попробуйте еще раз');
 
     // delete data to the state
-    dispatch({ type: LOGIN_FAIL });
+    dispatch({ type: AUTHENTICATED_FAIL });
   }
 }
 
@@ -66,15 +96,31 @@ export const registration = (username, email, password1, password2, actions) => 
   try {
 
     // send registration APi request
-    await authAPI.register(username, email, password1, password2);
+    let data = await authAPI.register(username, email, password1, password2);
 
     // stop loading the submit button
     actions.setSubmitting(false);
-    
+
+    // save data to the state
+    dispatch({ type: AUTHENTICATED_SUCCESS, access: data.access_token });
+
   } catch (error) {
+    const err = error.response.data;
+
+    // if there is an email error, show it
+    if (!!err.email) actions.setFieldError('email', err.email[0]);
+
+    // username error, show it
+    else if (!!err.username) actions.setFieldError('username', err.username[0]);
+
+    // password error, show it
+    else if (!!err.password1) actions.setFieldError('password1', err.password1[0]);
 
     // stop loading the submit button 
     actions.setSubmitting(false);
+
+    // delete data to the state
+    dispatch({ type: AUTHENTICATED_FAIL });
   }
 }
 
