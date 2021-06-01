@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import cls from 'classnames';
 import { Field, Form, Formik } from 'formik';
 
@@ -6,11 +7,30 @@ import logo from '@assets/logo.svg';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { registration } from '@redux/auth-reducer';
-import { validationSchema } from '@utils/validation';
 
 
 
 
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .min(3, 'Минимальная длина 2 символов')
+    .max(100, 'Максимальная длина 100 символов')
+    .required('Поле, обязательное для заполнения'),
+
+  email: Yup.string()
+    .email('Неправильный электронный адрес')
+    .required('Поле, обязательное для заполнения'),
+
+  password1: Yup.string()
+    .min(3, 'Минимальная длина 2 символов')
+    .max(100, 'Максимальная длина 100 символов')
+    .required('Поле, обязательное для заполнения'),
+
+  password2: Yup.string()
+    .min(3, 'Минимальная длина 2 символов')
+    .max(100, 'Максимальная длина 100 символов')
+    .required('Поле, обязательное для заполнения')
+})
 
 
 const Register = () => {
@@ -19,8 +39,7 @@ const Register = () => {
 
 
   const onSubmit = (data, actions) => {
-    dispatch(registration(data.username, data.email, data.password1, data.password2));
-    actions.setSubmitting(false);
+    dispatch(registration(data.username, data.email, data.password1, data.password2, actions));
   }
 
   return (

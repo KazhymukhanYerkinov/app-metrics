@@ -36,24 +36,45 @@ const authReducer = (state = inititalState, action) => {
 
 export const login = (email, password, actions) => async (dispatch) => {
   try {
+    
+    // send login API request
     let data = await authAPI.login(email, password);
+
+    // save the token to a cookie
     Cookie.set('access', data.access_token);
+
+    // stop loading the submit button
     actions.setSubmitting(false);
+
+    // save data to the state
     dispatch({ type: LOGIN_SUCCESS, access: data.access_token});
 
   } catch (error) {
+
+    // stop loading the submit button
     actions.setSubmitting(false);
+
+    // show global server error
     actions.setFieldError('global_error', 'Введен неправильный email или пароль, попробуйте еще раз');
+
+    // delete data to the state
     dispatch({ type: LOGIN_FAIL });
   }
 }
 
-export const registration = (username, email, password1, password2) => async (dispatch) => {
+export const registration = (username, email, password1, password2, actions) => async (dispatch) => {
   try {
-    let data = await authAPI.register(username, email, password1, password2);
-    console.log(data);
+
+    // send registration APi request
+    await authAPI.register(username, email, password1, password2);
+
+    // stop loading the submit button
+    actions.setSubmitting(false);
+    
   } catch (error) {
-    console.log(error);
+
+    // stop loading the submit button 
+    actions.setSubmitting(false);
   }
 }
 
