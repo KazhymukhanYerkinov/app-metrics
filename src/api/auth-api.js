@@ -12,5 +12,9 @@ export const authAPI = {
 
   user() {
     return instance.get('auth/user/').then(response => response.data);
+  },
+
+  logout() {
+    return instance.post('auth/logout/').then(response => response.data);
   }
 }

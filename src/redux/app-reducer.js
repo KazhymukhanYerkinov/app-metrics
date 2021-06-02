@@ -23,8 +23,6 @@ const appReducer = (state = initialState, action) => {
 export const initializeApp = () => (dispatch) => {
   let promise = dispatch(loadUser());
 
-  console.log(promise)
-
   Promise.all([promise]).then(() => {
     dispatch({ type: APP_INITIALIZED_SUCCESS })
   })

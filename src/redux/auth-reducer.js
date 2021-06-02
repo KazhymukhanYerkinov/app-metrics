@@ -7,41 +7,57 @@ const AUTHENTICATED_FAIL = 'auth-reducer/AUTHENTICATED_FAIL';
 const LOAD_USER_SUCCESS = 'auth-reducer/LOAD_USER_SUCCESS';
 const LOAD_USER_FAIL = 'auth-reducer/LOAD_USER_FAIL';
 
+const LOGOUT = 'auth-reducer/LOGOUT';
+
 
 let initialState = {
   access: Cookie.get('access'),
+  refresh: Cookie.get('refresh'),
   isAuth: false,
   user: {},
 }
 
 
 const authReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case AUTHENTICATED_SUCCESS:
+      Cookie.set('access', payload.access_token);
+      Cookie.set('refresh', payload.refresh_token);
       return {
         ...state,
         isAuth: true,
-        access: action.access
+        access: payload.access_token,
+        refresh: payload.refresh_token,
+        user: payload.user,
       }
 
     case LOAD_USER_SUCCESS:
       return {
         ...state,
-        user: action.user
+        isAuth: true,
+        user: payload,
+        
       }
     
     case LOAD_USER_FAIL:
       return {
         ...state,
+        isAuth: false,
         user: null
       }
 
+    case LOGOUT:
     case AUTHENTICATED_FAIL:
       Cookie.remove('access');
+      Cookie.remove('refresh');
       return {
         ...state,
         isAuth: false,
-        access: null
+        access: null,
+        refresh: null,
+        user: null
       }
 
     default:
@@ -51,18 +67,28 @@ const authReducer = (state = initialState, action) => {
 
 export const loadUser = () => async (dispatch) => {
   if (Cookie.get('access')) {
-
     try {
+
+      // send load_user API request
       let data = await authAPI.user();
-      dispatch({ type: LOAD_USER_SUCCESS, user: data.user })
+
+      // save data to the state
+      dispatch({ type: LOAD_USER_SUCCESS, payload: data })
+
     } catch (error) {
+
+      // clear data
       dispatch({ type: LOAD_USER_FAIL });
     }
 
   } else {
+
+    // clear data
     dispatch({ type: LOAD_USER_FAIL });
   }
 }
+
+
 
 export const login = (email, password, actions) => async (dispatch) => {
   try {
@@ -70,14 +96,11 @@ export const login = (email, password, actions) => async (dispatch) => {
     // send login API request
     let data = await authAPI.login(email, password);
 
-    // save the token to a cookie
-    Cookie.set('access', data.access_token);
-
     // stop loading the submit button
     actions.setSubmitting(false);
 
     // save data to the state
-    dispatch({ type: AUTHENTICATED_SUCCESS, access: data.access_token });
+    dispatch({ type: AUTHENTICATED_SUCCESS, payload: data });
 
   } catch (error) {
 
@@ -87,10 +110,12 @@ export const login = (email, password, actions) => async (dispatch) => {
     // show global server error
     actions.setFieldError('global_error', 'Введен неправильный email или пароль, попробуйте еще раз');
 
-    // delete data to the state
+    // clear data
     dispatch({ type: AUTHENTICATED_FAIL });
   }
 }
+
+
 
 export const registration = (username, email, password1, password2, actions) => async (dispatch) => {
   try {
@@ -102,7 +127,7 @@ export const registration = (username, email, password1, password2, actions) => 
     actions.setSubmitting(false);
 
     // save data to the state
-    dispatch({ type: AUTHENTICATED_SUCCESS, access: data.access_token });
+    dispatch({ type: AUTHENTICATED_SUCCESS, payload: data });
 
   } catch (error) {
     const err = error.response.data;
@@ -119,8 +144,24 @@ export const registration = (username, email, password1, password2, actions) => 
     // stop loading the submit button 
     actions.setSubmitting(false);
 
-    // delete data to the state
+    // clear data
     dispatch({ type: AUTHENTICATED_FAIL });
+  }
+}
+
+
+
+export const logout = () => async (dispatch) => {
+  try {
+
+    // send logout API request
+    await authAPI.logout();
+
+    // clear data
+    dispatch({ type: LOGOUT });
+
+  } catch (error) {
+    console.log(error);
   }
 }
 
