@@ -3,7 +3,7 @@ const path = require("path");
 
 module.exports = {
   devServer: {
-    port: 4000,
+    port: 3256,
     disableHostCheck: true,
     proxy: {
       "/api": {

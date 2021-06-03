@@ -21,6 +21,10 @@ firebase.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
+yarn.lock
+=======
 yarn.lock
 
 
+>>>>>>> d790236bc4853476a0b3c3b603c1fb61c01d383b
