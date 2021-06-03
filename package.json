@@ -18,7 +18,14 @@
     "react-scripts": "4.0.3",
     "redux": "3.7.2",
     "redux-thunk": "^2.3.0",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "@geist-ui/react": "^2.1.0-canary.2",
+    "@geist-ui/react-icons": "^1.0.1",
+    "clsx": "^1.1.1",
+    "heatmap.js": "^2.0.5",
+    "moment": "^2.29.1",
+    "react-day-picker": "^7.4.8",
+    "recharts": "^2.0.4"
   },
   "devDependencies": {
     "raw-loader": "^4.0.2",
