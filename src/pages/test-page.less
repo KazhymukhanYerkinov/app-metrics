@@ -1,0 +1,29 @@
+.test-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__page-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    [id$="chart"] {
+      width: 650px;
+      height: 400px;
+      margin: 5rem 0;
+    }
+
+    // hide lib highcharts logo
+    .highcharts-credits {
+      display: none;
+    }
+  }
+}
