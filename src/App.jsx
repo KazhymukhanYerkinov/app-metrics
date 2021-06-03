@@ -4,7 +4,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router";
 
-
 import './App.less'
 import { selectInitialize } from "./selectors/app-selector";
 
