@@ -23,6 +23,20 @@ const BarChart = () => {
           color: '#ffffff'
         }
       }
+    },
+    scales: {
+      x: {
+        borderWidth: 0,
+        ticks: {
+          
+          color: "#ffffff", // this here
+        },
+      },
+      y: {
+        ticks: {
+          color: "#ffffff",
+        }
+      }
     }
   }
 

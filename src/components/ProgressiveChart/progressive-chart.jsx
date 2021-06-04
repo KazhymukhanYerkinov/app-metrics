@@ -4,9 +4,9 @@ import { Line } from 'react-chartjs-2';
 const LineChart = () => {
 
   const data1 = [];
-  let prev = 100;
-  for (let i = 0; i < 1000; i++) {
-    prev += 5 - Math.random() * 10;
+  let prev = 0;
+  for (let i = 2008; i <= 2020; i+=0.01) {
+    prev += 5 - (Math.random() * 10);
     data1.push({ x: i, y: prev });
   }
 
@@ -34,7 +34,15 @@ const LineChart = () => {
     },
     scales: {
       x: {
-        type: 'linear'
+        type: 'linear',
+        ticks: {
+          color: "#ffffff", // this here
+        },
+      },
+      y: {
+        ticks: {
+          color: "#ffffff",
+        }
       }
     }
   }
