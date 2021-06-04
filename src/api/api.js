@@ -1,20 +1,24 @@
 import axios from "axios";
 import Cookie from "js-cookie";
 
-// export const oldKlikServer =
-//   "https://klikmetrics.ru/userTrack/";
+export const oldKlikServer =
+  "https://klikmetrics.ru/userTrack/";
 
 export const instance = axios.create({
   baseURL: "https://klikmetrics-heroku.herokuapp.com/",
 });
 
 instance.interceptors.request.use((req) => {
-  if (Cookie.get("access")) {
+  if (Cookie.get("access")) { 
     req.headers["Authorization"] = `Bearer ${Cookie.get("access")}`;
     req.headers["Content-Type"] = "application/json";
+    req.headers["withCredentials"] = true;
+    req.headers["Access-Control-Allow-Origin"] = "*";
     return req;
   } else {
     req.headers["Content-Type"] = "application/json";
+    req.headers["withCredentials"] = true;
+    req.headers["Access-Control-Allow-Origin"] = "*";
     return req;
   }
 });

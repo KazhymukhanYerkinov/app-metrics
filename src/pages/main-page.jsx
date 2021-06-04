@@ -1,12 +1,15 @@
 import React from "react";
+import { PieChart, LineChart, BarChart } from "@components";
+
 
 const Main = () => {
-  return <div>Welcome to Main Page
-
-
-
-    {/* Yernar тут был3 */}
-  </div>;
+  return (
+    <div>
+      <PieChart />
+      <LineChart />
+      <BarChart />
+    </div>
+  )
 };
 
 export default Main;
