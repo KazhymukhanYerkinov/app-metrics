@@ -13,11 +13,15 @@ const LineChart = () => {
   const data = {
     datasets: [{
       borderColor: '#7CB5EC',
+      fill: true,
+      background: 'linear-gradient(180deg, #7CB5EC 0%, rgba(124, 181, 236, 0) 100%)',
       borderWidth: 1,
       radius: 0,
       data: data1,
     }]
   }
+
+  
 
 
 

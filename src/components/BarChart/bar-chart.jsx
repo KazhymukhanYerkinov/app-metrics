@@ -5,8 +5,9 @@ const BarChart = () => {
 
   const data = {
     labels: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas'],
-    datasets: [{
-      label: 'My First Datasets',
+    datasets: [
+    {
+      label: 'John',
       data: [5, 3, 4, 7, 2],
       backgroundColor: ['#7CB5EC']
     }]
@@ -15,13 +16,16 @@ const BarChart = () => {
   const options = {
     plugins: {
       legend: {
-        display: false,
+        display: true,
+        position: 'bottom',
         labels: {
+          usePointStyle: true,
           color: '#ffffff'
         }
       }
     }
   }
+
   return (
     <div className = 'chart'>
       <div className = 'chart__inner'>
