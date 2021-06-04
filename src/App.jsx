@@ -1,4 +1,4 @@
-import { Main, Login, Register, Test } from "@pages";
+import { Main, Login, Register, TestChart } from "@pages";
 import Heatmap from "@pages/Heatmap";
 
 import React from "react";
@@ -15,7 +15,7 @@ const App = () => {
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/heatmap" component={Heatmap} />
-      <Route exact path="/test" component={Test} />
+      <Route exact path="/test-chart" component={TestChart} />
     </div>
   );
 };

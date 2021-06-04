@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import Highcharts from "highcharts";
 
-import "./test-page.less";
+import "./test-chart-page.less";
 
-const Test = () => {
+const TestChart = () => {
   // visitors-chart
   useEffect(() => {
     Highcharts.chart("visitors-chart", {
@@ -348,4 +348,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default TestChart;
