@@ -336,10 +336,10 @@ const TestChart = () => {
   }, []);
 
   return (
-    <div className="test-page">
-      <h2 className="test-page__page-title">Test Page</h2>
+    <div className="test-chart-page">
+      <h2 className="test-chart-page__page-title">Test Page</h2>
 
-      <section className="test-page__charts">
+      <section className="test-chart-page__charts">
         <figure id="visitors-chart"></figure>
         <figure id="ad-conversion-chart"></figure>
         <figure id="traffic-overview-chart"></figure>
