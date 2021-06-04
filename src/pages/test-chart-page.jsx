@@ -337,7 +337,7 @@ const TestChart = () => {
 
   return (
     <div className="test-chart-page">
-      <h2 className="test-chart-page__page-title">Test Page</h2>
+      <h2 className="test-chart-page__page-title">Test Chart Page</h2>
 
       <section className="test-chart-page__charts">
         <figure id="visitors-chart"></figure>
