@@ -4,6 +4,8 @@ import {
   Register,
   TestChart,
   TestApi,
+  TestIframe,
+  TestAds,
 } from "@pages";
 import Heatmap from "@pages/Heatmap";
 
@@ -27,6 +29,8 @@ const App = () => {
         component={TestChart}
       />
       <Route exact path="/test-api" component={TestApi} />
+      <Route exact path="/test-iframe" component={TestIframe} />
+      <Route exact path="/test-ads" component={TestAds} />
     </div>
   );
 };
