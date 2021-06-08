@@ -1,0 +1,57 @@
+.pie-chart {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    min-height: 600px;
+
+    border-radius: 15px;
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(91.85deg, #334169 50%, rgba(23, 37, 78, 0.8) 100%);
+
+    &__figure {
+        border-radius: 15px;
+        display: block;
+        
+    }
+    &__header {
+        display: flex;
+        align-items: center;
+
+        margin-bottom: 65px; 
+    }
+
+    &__button {
+        width: 100%;
+        max-width: 120px;
+        height: 45px;
+        cursor: pointer;
+        border: none;
+        color: #ffffff;
+
+        font-family: Open Sans;
+        font-size: 14px;
+        line-height: 19px;
+        background: #242F50;
+        border-bottom: 1px solid #7A8BA7;
+
+        &.active {
+            border-bottom: none;
+            background: linear-gradient(91.85deg, #334169 100%, rgba(23, 37, 78, 0.4) 100%); 
+        }
+        &--first {
+            border-radius: 15px;
+        }
+    }
+
+    &__line {
+        width: 100%;
+        height: 45px;
+        border-bottom: 1px solid #7A8BA7;
+    }
+
+    
+    
+
+
+    
+}

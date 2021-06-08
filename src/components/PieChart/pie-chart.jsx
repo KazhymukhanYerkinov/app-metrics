@@ -1,47 +1,88 @@
 import React from 'react';
-import { Pie } from 'react-chartjs-2';
+import Highcharts from 'highcharts';
 
 
 const PieChart = () => {
-  const data = {
-    labels: ['Chrome', 'Internet Explorer', 'Firefox', 'Edge', 'Safari', 'Other'],
-    
-    datasets: [{
-      label: 'My First Dataset',
-      data: [300, 50, 50, 20, 20, 35],
-      backgroundColor: [
-        '#7CB5EC',
-        '#434348',
-        '#90ED7D',
-        '#F7A35C',
-        '#8085E9',
-        '#F15C80',
 
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const options = {
-    plugins: {
+  React.useEffect(() => {
+    Highcharts.chart('pie-chart', {
+      chart: {
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        backgroundColor: 'transparent'
+        
+      },
+      title: {
+        text: null
+      },
+      tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+          valueSuffix: '%'
+        }
+      },
+      plotOptions: {
+        pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          dataLabels: {
+            enabled: false,
+          },
+          showInLegend: true
+        }
+      },
       legend: {
-        display: true,
-        position: 'right',
-        labels: {
-          boxWidth: 15,
-          boxHeight: 15,
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        itemMarginTop: 5,
+        itemMarginBottom: 5,
+        itemStyle: {
           color: '#ffffff'
         }
-      }
-    }
-  }
-  
-  return ( 
-    <div className = 'chart'>        
-      <div className = 'chart__inner'>
-        <Pie data = { data } options = {options}></Pie>
+      },
+      series: [{
+        name: 'Brands',
+        colorByPoint: true, 
+        data: [{
+          name: 'Chrome',
+          y: 61.41,
+        }, {
+          name: 'Internet Explorer',
+          y: 11.84
+        }, {
+          name: 'Firefox',
+          y: 10.85
+        }, {
+          name: 'Edge',
+          y: 4.67
+        }, {
+          name: 'Safari',
+          y: 4.18
+        }, {
+          name: 'Other',
+          y: 7.05
+        }]
+      }]
+    });
+  }, []);
+
+  return (
+    <div className = 'pie-chart'>
+      <div>
+      <div className = 'pie-chart__header'>
+        <button className = 'pie-chart__button pie-chart__button--first active'> Visitors </button>
+        <button className = 'pie-chart__button'> Ads </button>
+        <div className = 'pie-chart__line'></div>
       </div>
+      <div className = 'pie-chart__figure' id="pie-chart"></div>
+      </div>
+      
     </div>
+  
   )
 }
 

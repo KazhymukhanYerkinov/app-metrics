@@ -4,11 +4,14 @@ import { PieChart, LineChart, BarChart } from "@components";
 
 const Main = () => {
   return (
-    <div>
-      <PieChart />
-      <LineChart />
+    <React.Fragment>
+      <div className = 'main'>
+        <PieChart />
+        <LineChart />
+      </div>
       <BarChart />
-    </div>
+    </React.Fragment>
+    
   )
 };
 

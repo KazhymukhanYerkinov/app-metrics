@@ -1,58 +1,110 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
+import Highcharts from 'highcharts';
+import { DatePicker } from 'antd';
+import moment from 'moment';
+import { data } from 'src/data';
+
+import 'antd/dist/antd.css';
+
+const { RangePicker } = DatePicker;
 
 const LineChart = () => {
 
-  const data1 = [];
-  let prev = 0;
-  for (let i = 2008; i <= 2020; i+=0.01) {
-    prev += 5 - (Math.random() * 10);
-    data1.push({ x: i, y: prev });
-  }
-
-  const data = {
-    datasets: [{
-      borderColor: '#7CB5EC',
-      fill: true,
-      background: 'linear-gradient(180deg, #7CB5EC 0%, rgba(124, 181, 236, 0) 100%)',
-      borderWidth: 1,
-      radius: 0,
-      data: data1,
-    }]
-  }
-
-  
-
-
-
-  const options = {
-    interaction: {
-      intersect: false
-    },
-    plugins: {
-      legend: false
-    },
-    scales: {
-      x: {
-        type: 'linear',
-        ticks: {
-          color: "#ffffff", // this here
+  React.useEffect(() => {
+    Highcharts.chart("ad-conversion-chart", {
+      chart: {
+        zoomType: "x",
+        backgroundColor: 'transparent',
+      },
+      title: {
+        text: null,
+      },
+      subtitle: {
+        text: null,
+      },
+      xAxis: {
+        labels: {
+          style: {
+            color: '#ffffff'
+          }
+        },
+        type: "datetime",
+      },
+      yAxis: {
+        labels: {
+          style: {
+            color: '#ffffff'
+          }
+        },
+        title: {
+          text: null,
         },
       },
-      y: {
-        ticks: {
-          color: "#ffffff",
-        }
-      }
-    }
-  }
+      legend: {
+        enabled: false,
+        
+      },
+      plotOptions: {
+        area: {
+          fillColor: {
+            linearGradient: {
+              x1: 0,
+              y1: 0,
+              x2: 0,
+              y2: 1,
+            },
+            stops: [
+              [0, Highcharts.getOptions().colors[0]],
+              [
+                1,
+                Highcharts.color(
+                  Highcharts.getOptions().colors[0]
+                )
+                  .setOpacity(0)
+                  .get("rgba"),
+              ],
+            ],
+          },
+          marker: {
+            radius: 2,
+          },
+          lineWidth: 1,
+          states: {
+            hover: {
+              lineWidth: 1,
+            },
+          },
+          threshold: null,
+        },
+      },
+      
+      series: [
+        {
+          type: "area",
+          name: "Ad conversion",
+          data: data,
+        },
+      ],
+    });
+  }, []);
+
+  const dateFormat = 'YYYY/MM/DD';
+  
   return (
-    <div className='chart'>
-      <div className='chart__inner'>
-        <Line data={data} options={options}></Line>
+    <div className = 'progressive-chart'>
+      <div className = 'progressive-chart__header'>
+        <div className = 'progressive-chart__title'> Ad conversion </div>
+
+        <RangePicker
+          className = 'progressive-chart__date'
+          defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
+          format={dateFormat}
+        />
       </div>
+      <div className = 'progressive-chart__figure' id = 'ad-conversion-chart'></div>
     </div>
   )
+  
 }
 
 export default LineChart;
