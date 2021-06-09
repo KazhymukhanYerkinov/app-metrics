@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 
 import axios from "axios";
@@ -153,10 +153,10 @@ export const TestIframe = (props) => {
                   <path
                     d="M2 18.027C134.6 -27.7042 95 41.3898 170 18.0269"
                     stroke="url(#paint0_linear)"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-dasharray="9 9"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeDasharray="9 9"
                   />
                   <defs>
                     <linearGradient
@@ -167,18 +167,18 @@ export const TestIframe = (props) => {
                       y2="32.2039"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#71DDFF" />
+                      <stop stopColor="#71DDFF" />
                       <stop
                         offset="0.5"
-                        stop-color="#489CFF"
+                        stopColor="#489CFF"
                       />
                       <stop
                         offset="0.9999"
-                        stop-color="#B67DFF"
+                        stopColor="#B67DFF"
                       />
                       <stop
                         offset="1"
-                        stop-color="#B67DFF"
+                        stopColor="#B67DFF"
                       />
                     </linearGradient>
                   </defs>
@@ -328,10 +328,10 @@ export const TestIframe = (props) => {
                   <path
                     d="M2 18.027C134.6 -27.7042 95 41.3898 170 18.0269"
                     stroke="url(#paint0_linear)"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-dasharray="9 9"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeDasharray="9 9"
                   />
                   <defs>
                     <linearGradient
@@ -342,18 +342,18 @@ export const TestIframe = (props) => {
                       y2="32.2039"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#71DDFF" />
+                      <stop stopColor="#71DDFF" />
                       <stop
                         offset="0.5"
-                        stop-color="#489CFF"
+                        stopColor="#489CFF"
                       />
                       <stop
                         offset="0.9999"
-                        stop-color="#B67DFF"
+                        stopColor="#B67DFF"
                       />
                       <stop
                         offset="1"
-                        stop-color="#B67DFF"
+                        stopColor="#B67DFF"
                       />
                     </linearGradient>
                   </defs>
@@ -467,6 +467,8 @@ export const TestIframe = (props) => {
                   Посмотреть статистику
                 </div>
               </div>
+              {/* <div class="wave"></div> */}
+              {/* <div class="waveMask"></div> */}
               <iframe
                 title="uuid-2"
                 style={{

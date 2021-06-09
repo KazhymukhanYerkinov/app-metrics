@@ -121,40 +121,80 @@
         }
       }
 
+      .wave {
+        position: relative;
+        left: -8px;
+        width: 100%;
+        height: 70vh;
+        background-image: linear-gradient(
+          -180deg,
+          #18aaff 13%,
+          #1033fa 91%
+        );
+        // background: transparent;
+        // opacity: 0.4;
+        line-height: 200px;
+        text-align: center;
+        font-size: 32px;
+        cursor: pointer;
+      }
+
+      .waveMask {
+        position: absolute;
+        width: 100%;
+        height: 70vh;
+        top: 0;
+        left: 50%;
+        border-radius: 40%;
+        background-color: rgba(255, 255, 255, 0.4);
+        transform: translate(-50%, -82%) rotate(0);
+        animation: toRotate 10s linear -5s infinite;
+        z-index: 20;
+        pointer-events: none;
+      }
+      @keyframes toRotate {
+        50% {
+          transform: translate(-50%, -70%) rotate(180deg);
+        }
+        100% {
+          transform: translate(-50%, -70%) rotate(360deg);
+        }
+      }
+
       iframe {
         border-radius: 18px;
       }
     }
+  }
 
-    .iframes__site-conversion {
+  .iframes__site-conversion {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .site-conversion__icon {
       width: 100%;
-      height: 100%;
+    }
+
+    .site-conversion__text {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-
-      .site-conversion__icon {
-        width: 100%;
-      }
-      
-      .site-conversion__text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: #000;
-      }
+      align-items: center;
+      color: #000;
     }
-    //   justify-content: center;
-    //   align-items: center;
-
-    //   [class$="api"] {
-    //     width: 650px;
-    //     height: 400px;
-    //     margin: 5rem 0;
-    //   }
   }
+  //   justify-content: center;
+  //   align-items: center;
+
+  //   [class$="api"] {
+  //     width: 650px;
+  //     height: 400px;
+  //     margin: 5rem 0;
+  //   }
 }
 
 // ANTD STYLE
