@@ -37,7 +37,7 @@
           top: 1.75rem;
         }
 
-        .site-wrap__site-view-statistic-btn{
+        .site-wrap__site-view-statistic-btn {
           bottom: 0;
         }
       }
@@ -118,15 +118,32 @@
           margin-left: 0.5rem;
           font-size: 0.75rem;
           color: #fff;
-
         }
       }
 
       iframe {
         border-radius: 18px;
       }
+    }
 
-      .iframes__site-conversion {
+    .iframes__site-conversion {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .site-conversion__icon {
+        width: 100%;
+      }
+      
+      .site-conversion__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #000;
       }
     }
     //   justify-content: center;
