@@ -1,25 +1,110 @@
 .test-ads-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__page-title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__adss {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  
-    &__page-title {
-      font-size: 2rem;
-      font-weight: bold;
-    }
-  
-    &__adss {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  
-    //   [class$="api"] {
-    //     width: 650px;
-    //     height: 400px;
-    //     margin: 5rem 0;
-    //   }
+    width: 100%;
+
+    .google-ads {
+      width: 50%;
+      background: linear-gradient(
+        91.85deg,
+        #334169 0%,
+        rgba(23, 37, 78, 0.4) 100%
+      );
+      border: 2px solid #a8a4a4;
+      box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+
+      &__about,
+      &__info {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__about {
+        border-right: 1px solid #dadff2;
+        .about__brand {
+          width: 60%;
+          height: 50px;
+          background: inherit;
+          margin-bottom: 1rem;
+        }
+        .about__video {
+          border-radius: 6px;
+        }
+      }
+
+      &__info {
+        height: 100%;
+        justify-content: space-between;
+
+        .info__actions {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .actions__select-btn {
+            max-width: 50%;
+          }
+          .actions__statistic-btn {
+            color: #fff;
+            background: linear-gradient(
+              91.93deg,
+              #1b7ff5 0%,
+              rgba(27, 127, 245, 0.4) 135.68%
+            );
+            box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 4px;
+            padding: 0.25rem 0.5rem;
+            cursor: pointer;
+          }
+        }
+
+        .info__table {
+          // display: flex;
+          // flex-direction: column;
+
+          // .table__head,
+          // .table__body {
+          // display: flex;
+          // justify-content: space-between;
+
+          [class$="__text"] {
+            text-align: start;
+            // flex: 0 0 calc(100% / 6);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #fff;
+          }
+        }
+
+        .table__head {
+          border-bottom: 1px solid #dadff2;
+          padding-bottom: 1rem;
+          .head__text {
+          }
+        }
+
+        .table__body {
+          padding-top: 1rem;
+          .body__text {
+          }
+        }
+      }
     }
   }
-  
+}
