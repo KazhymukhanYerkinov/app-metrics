@@ -193,6 +193,10 @@ const tabs = [
     value: "geo",
     label: "Гео",
   },
+  {
+    value: "clickOut",
+    label: "Клик аут",
+  },
 ];
 
 const Heatmap = ({
@@ -272,40 +276,40 @@ const Heatmap = ({
 
       <div className="heatmap-content-wrap">
         <div className="tabs-wrap">
-          <div className="tab tab--active">Клики</div>
-          <div className="tab">Движение</div>
-          <div className="tab">Скролл</div>
-          <div className="tab">Внимание</div>
-          <div className="tab">Клик аут</div>
-          <div className="tab">Гео</div>
+          {tabs.map((el) => (
+            <div
+              className={`tab ${
+                el.value === tab ? "tab--active" : ""
+              }`}
+              onClick={() => {
+                setTab(el.value);
+              }}
+            >
+              {el.label}
+            </div>
+          ))}
         </div>
         <div className="content">
-        {/* <Toolbar /> */}
-          <Page>
-            <Page.Content>
-              <Fieldset.Group
-                value={tab}
-                onChange={(v) => setTab(v)}
-              >
-                {tabs.map((t) => (
-                  <Fieldset
-                    label={t.label}
-                    value={t.value}
-                    key={t.value}
-                  >
-                    {tab === t.value ? (
-                      <Display
-                        type={t.value}
-                        domain={domain}
-                        date={date}
-                        filter={filter}
-                      />
-                    ) : null}
-                  </Fieldset>
-                ))}
-              </Fieldset.Group>
-            </Page.Content>
-          </Page>
+          {/* <Toolbar /> */}
+
+          {tabs.map((t) => {
+            if (tab === t.value) {
+              if (t.value === "geo") {
+                return (<div>GEO</div>)
+              } else {
+                return (
+                  <Display
+                    type={t.value}
+                    domain={domain}
+                    date={date}
+                    filter={filter}
+                  />
+                );
+              }
+            } else {
+              return null;
+            }
+          })}
         </div>
       </div>
     </>
