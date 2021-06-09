@@ -27,6 +27,7 @@ import {
 
 import { oldKlikServer as server } from "@api/api";
 import classes from "./Heatmap.module.css";
+import "./Heatmap.less";
 import Toolbar from "@components/Toolbar";
 
 const createAttention = (e, height, items, settings) => {
@@ -188,6 +189,10 @@ const tabs = [
     value: "attention",
     label: "Внимание",
   },
+  {
+    value: "geo",
+    label: "Гео",
+  },
 ];
 
 const Heatmap = ({
@@ -238,7 +243,7 @@ const Heatmap = ({
     : "";
   return (
     <>
-      <Toolbar />
+      {/* <Toolbar />
       <Page>
         <Page.Content>
           <Fieldset.Group
@@ -263,7 +268,46 @@ const Heatmap = ({
             ))}
           </Fieldset.Group>
         </Page.Content>
-      </Page>
+      </Page> */}
+
+      <div className="heatmap-content-wrap">
+        <div className="tabs-wrap">
+          <div className="tab tab--active">Клики</div>
+          <div className="tab">Движение</div>
+          <div className="tab">Скролл</div>
+          <div className="tab">Внимание</div>
+          <div className="tab">Клик аут</div>
+          <div className="tab">Гео</div>
+        </div>
+        <div className="content">
+        {/* <Toolbar /> */}
+          <Page>
+            <Page.Content>
+              <Fieldset.Group
+                value={tab}
+                onChange={(v) => setTab(v)}
+              >
+                {tabs.map((t) => (
+                  <Fieldset
+                    label={t.label}
+                    value={t.value}
+                    key={t.value}
+                  >
+                    {tab === t.value ? (
+                      <Display
+                        type={t.value}
+                        domain={domain}
+                        date={date}
+                        filter={filter}
+                      />
+                    ) : null}
+                  </Fieldset>
+                ))}
+              </Fieldset.Group>
+            </Page.Content>
+          </Page>
+        </div>
+      </div>
     </>
   );
 };
@@ -477,12 +521,12 @@ const Display = ({ type, domain, date, filter }) => {
   return (
     <div className={classes.Display}>
       <div className={classes.toolbar}>
-        <PageSelector
+        {/* <PageSelector
           page={page}
           setPage={setPage}
           domain={domain}
-        />
-        <ButtonGroup size="small">
+        /> */}
+        {/* <ButtonGroup size="small">
           <Button
             disabled={size.width === 380}
             onClick={() =>
@@ -505,7 +549,7 @@ const Display = ({ type, domain, date, filter }) => {
             }
             icon={<MonitorIcon />}
           />
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
       <Spacer y={1} />
       <div
