@@ -85,6 +85,11 @@ export const TestAds = (props) => {
     return () => {};
   }, []);
 
+  // Change Google company
+  const changeCompany = (value) => {
+    console.log(value);
+  };
+
   return (
     <div className="test-ads-page">
       <h2 className="test-ads-page__page-title">
@@ -114,12 +119,12 @@ export const TestAds = (props) => {
                 <div className="info__actions">
                   <Select
                     defaultValue={
-                      companys.length
+                      companys.length !== 0
                         ? companys[0].name
                         : "..."
                     }
                     onChange={(value) => {
-                      console.log(value);
+                      changeCompany(value);
                     }}
                     className="actions__select-btn"
                   >

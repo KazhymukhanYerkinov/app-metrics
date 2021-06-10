@@ -36,7 +36,7 @@ export const TestApiPage = () => {
         {
           headers: {
             Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzMjM4OTYzLCJqdGkiOiJlOWMyYzMyYzk0OTg0NDQzYjQwYzc0YTA5YzMwYWUwMSIsInVzZXJfaWQiOjN9.S8u0LWURWfhgG03mznxW9kgiQA02miMkWXm4L78HWQ8",
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzMyMTAzLCJqdGkiOiIxMzVjMGZlMWIyMDU0MjI2YWVhNjdkNjEwNDAwNWNhZCIsInVzZXJfaWQiOjJ9.ZsfidNJipObYbM8tLtGVUWNcwIab37ZeD5xyBG9UJZ8",
           },
         }
       )
