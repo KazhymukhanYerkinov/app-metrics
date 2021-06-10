@@ -14,6 +14,77 @@ import "./test-ads-page.less";
 const { Option } = Select;
 
 export const TestAds = (props) => {
+  const [googleCardInfo, setGoogleCardInfo] = useState({
+    crc: null,
+    ctr: null,
+    impressions: null,
+    views: null,
+    conversions: null,
+    cost: null,
+  });
+
+  const [companys, setCompanys] = useState([]);
+
+  // google cart company info
+  useEffect(() => {
+    axios({
+      method: "post",
+      url: "http://192.168.1.94:8000/google/campaign/",
+      data: {
+        user_type: "manager",
+        access_id: "4783232548",
+        client_id: "2066190552",
+      },
+      headers: {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNjY3NTc1LCJqdGkiOiJhNjlmOTUyZGMzMzk0ZGIzYTI0NWEyZjI3YWNiZTcwMyIsInVzZXJfaWQiOjN9.3MAUUJZf-wg1f7YuJ9axQKULhx16OuuEK9xWRHlkmFg",
+      },
+    })
+      .then((res) => {
+        setCompanys([...companys, ...res.data.campaigns]);
+      })
+      .catch((err) => {
+        Object.keys(err).forEach((el) => {
+          console.log(err[el]);
+        });
+      });
+
+    return () => {};
+  }, []);
+
+  // google cart info
+  useEffect(() => {
+    axios
+      .get(
+        "http://192.168.1.94:8000/google/get-ad-details/",
+        {},
+        {
+          headers: {
+            Authorization:
+              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzMyMTAzLCJqdGkiOiIxMzVjMGZlMWIyMDU0MjI2YWVhNjdkNjEwNDAwNWNhZCIsInVzZXJfaWQiOjJ9.ZsfidNJipObYbM8tLtGVUWNcwIab37ZeD5xyBG9UJZ8",
+          },
+        }
+      )
+      .then((res) => {
+        let responseData = {
+          crc: res.data.response[0].cpc,
+          ctr: res.data.response[0].ctr,
+          impressions: res.data.response[0].impressions,
+          views: res.data.response[0].views,
+          conversions: res.data.response[0].all_conversions,
+          cost: res.data.response[0].average_cost,
+        };
+
+        setGoogleCardInfo(
+          Object.assign({}, setGoogleCardInfo, responseData)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return () => {};
+  }, []);
+
   return (
     <div className="test-ads-page">
       <h2 className="test-ads-page__page-title">
@@ -42,21 +113,23 @@ export const TestAds = (props) => {
               <div className="google-ads__info">
                 <div className="info__actions">
                   <Select
-                    defaultValue="comp1"
+                    defaultValue={
+                      companys.length
+                        ? companys[0].name
+                        : "..."
+                    }
                     onChange={(value) => {
                       console.log(value);
                     }}
                     className="actions__select-btn"
                   >
-                    <Option value="comp1">
-                      Кампания 1
-                    </Option>
-                    <Option value="comp2">
-                      Кампания 2
-                    </Option>
-                    <Option value="comp3">
-                      Кампания 3
-                    </Option>
+                    {companys.map((el) => {
+                      return (
+                        <Option key={el.id} value={el.id}>
+                          {el.name}
+                        </Option>
+                      );
+                    })}
                   </Select>
 
                   <div className="actions__statistic-btn">
@@ -94,7 +167,7 @@ export const TestAds = (props) => {
                       </Col>
                       <Col span={4}>
                         <div className="head__text">
-                          Sum
+                          Cost
                         </div>
                       </Col>
                     </Row>
@@ -103,31 +176,47 @@ export const TestAds = (props) => {
                     <Row>
                       <Col span={4}>
                         <div className="body__text">
-                          $0.12
+                          {googleCardInfo.crc !== null
+                            ? "$ " + googleCardInfo.crc
+                            : "..."}
                         </div>
                       </Col>
                       <Col span={4}>
                         <div className="body__text">
-                          3.74%
+                          {googleCardInfo.ctr !== null
+                            ? googleCardInfo.ctr + "%"
+                            : "..."}
                         </div>
                       </Col>
                       <Col span={4}>
                         <div className="body__text">
-                          84 221
+                          {googleCardInfo.impressions !==
+                          null
+                            ? googleCardInfo.impressions
+                            : "..."}
                         </div>
                       </Col>
                       <Col span={4}>
                         <div className="body__text">
-                          5 337
+                          {googleCardInfo.views !== null
+                            ? googleCardInfo.views
+                            : "..."}
                         </div>
                       </Col>
                       <Col span={4}>
                         <div className="body__text">
-                          421
+                          {googleCardInfo.conversions !==
+                          null
+                            ? googleCardInfo.conversions
+                            : "..."}
                         </div>
                       </Col>
                       <Col span={4}>
-                        <div className="body__text">97</div>
+                        <div className="body__text">
+                          {googleCardInfo.cost !== null
+                            ? googleCardInfo.cost
+                            : "..."}
+                        </div>
                       </Col>
                     </Row>
                   </div>
