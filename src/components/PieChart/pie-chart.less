@@ -1,23 +1,20 @@
 .pie-chart {
     width: 100%;
     max-width: 600px;
-    height: 100%;
-    min-height: 600px;
+    
 
     border-radius: 15px;
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
     background: linear-gradient(91.85deg, #334169 50%, rgba(23, 37, 78, 0.8) 100%);
 
-    &__figure {
-        border-radius: 15px;
-        display: block;
-        
+    &__content {
+        width: 70%;
+        margin: 30px auto;
     }
+        
     &__header {
         display: flex;
         align-items: center;
-
-        margin-bottom: 65px; 
     }
 
     &__button {
@@ -39,7 +36,7 @@
             background: linear-gradient(91.85deg, #334169 100%, rgba(23, 37, 78, 0.4) 100%); 
         }
         &--first {
-            border-radius: 15px;
+            border-top-left-radius: 15px;
         }
     }
 
