@@ -30,8 +30,6 @@ import classes from "./Heatmap.module.css";
 import "./Heatmap.less";
 import Toolbar from "@components/Toolbar";
 
-
-
 const createAttention = (e, height, items, settings) => {
   const getPoints = (start, height, items) => {
     const validItems = items.filter(
@@ -209,7 +207,6 @@ const Heatmap = ({
   setDomains,
   setChecked,
 }) => {
-
   // 成功登录后获取的数据
   const [, setToast] = useToasts();
 
@@ -276,7 +273,7 @@ const Heatmap = ({
           </Fieldset.Group>
         </Page.Content>
       </Page> */}
-
+      <Toolbar />
       <div className="heatmap-content-wrap">
         <div className="tabs-wrap">
           {tabs.map((el) => (
