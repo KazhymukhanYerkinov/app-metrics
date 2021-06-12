@@ -10,6 +10,19 @@ const { RangePicker } = DatePicker;
 
 
 const LineChart = ({ fill, borderColor }) => {
+
+  const [startTime, setStartTime] = React.useState(0);
+  const [endTime, setEndTime] = React.useState(0);
+
+  const getDate = (value, dateString) => {
+    let start = new Date(dateString[0]);
+    let end = new Date(dateString[1]);
+
+    setStartTime(Number(start.getTime()));
+    setEndTime(Number(end.getTime()))
+  
+  }
+
   let lineData = {
     datasets: [{
       borderColor: borderColor,
@@ -26,6 +39,9 @@ const LineChart = ({ fill, borderColor }) => {
     },
     scales: {
       x: {
+        
+        min: startTime,
+        max: endTime,
         grid: {
           display: false
         },
@@ -49,7 +65,7 @@ const LineChart = ({ fill, borderColor }) => {
     }
   }
 
-  const dateFormat = 'YYYY/MM/DD';
+  const dateFormat = 'DD.MM.YYYY';
   
   return (
     <div className = 'progressive-chart'>
@@ -57,8 +73,9 @@ const LineChart = ({ fill, borderColor }) => {
         <div className = 'progressive-chart__title'> Ad conversion </div>
 
         <RangePicker
+          onChange = { getDate }
           className = 'progressive-chart__date'
-          defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
+          defaultValue={[moment('01.02.2021', dateFormat), moment('01.03.2021', dateFormat)]}
           format={dateFormat}
         />
       </div>

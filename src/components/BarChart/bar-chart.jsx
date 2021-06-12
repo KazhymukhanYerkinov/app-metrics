@@ -1,12 +1,19 @@
 import { Bar } from 'react-chartjs-2';
-import { DatePicker } from 'antd';
+import { DatePicker, TimePicker } from 'antd';
 import moment from 'moment';
 
 import 'antd/dist/antd.css';
+import React from 'react';
 
 const { RangePicker } = DatePicker;
 
 const BarChart = () => {
+
+  const [ picker, setPicker ] = React.useState(true);
+
+  const handlePicker = () => {
+    setPicker((prevState) => !prevState);
+  }
   
   let data = {
     labels: ['21.01','22.01','23.01','24.01','25.01','26.01','27.01','28.01', '29.01','30.01','31.01','01.01' ],
@@ -61,11 +68,12 @@ const BarChart = () => {
         <div className = 'bar-chart__title'> Traffic overview </div>
 
         <div className = 'bar-chart__date'>
-          <RangePicker
+          {picker ? <RangePicker
             defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
             format={dateFormat}
-          />
-          <button className = 'bar-chart__picker'> Отображать по | Часам </button>
+          /> :
+           <TimePicker.RangePicker />}
+          <button className = 'bar-chart__picker' onClick = { handlePicker }> Отображать по | {picker ? 'Часам': 'Дням'} </button>
         </div>
       </div>
       <div className = 'bar-chart__content'>

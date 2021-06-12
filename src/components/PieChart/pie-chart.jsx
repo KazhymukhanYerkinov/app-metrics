@@ -1,8 +1,14 @@
-
+import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
 
 const PieChart = ({ items, labels, colors, position }) => {
+
+  const [ index, setIndex ] = React.useState(0);
+
+  const handlePage = (id) => {
+    setIndex(id);
+  }
 
   let data = {
     labels: labels,
@@ -31,12 +37,13 @@ const PieChart = ({ items, labels, colors, position }) => {
   return (
     <div className = 'pie-chart'>
       <div className = 'pie-chart__header'>
-        <button className = 'pie-chart__button pie-chart__button--first active'> Visitors </button>
-        <button className = 'pie-chart__button'> Ads </button>
+        <button className = 'pie-chart__button pie-chart__button--first active' onClick = {() => handlePage(0)}> Visitors </button>
+        <button className = 'pie-chart__button' onClick = {() => handlePage(1)}> Ads </button>
         <div className = 'pie-chart__line'></div>
       </div>
       <div className = 'pie-chart__content'>
-        <Pie data = { data } options = { options }/>
+        {index === 0 && <Pie data = { data } options = { options }/>}
+        {index === 1 && <div></div>}
       </div>
        
     </div>

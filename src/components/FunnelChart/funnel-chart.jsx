@@ -54,24 +54,27 @@ const FunnelChart = () => {
       <div className = 'funnel-chart__footer'>
         <table>
           <thead>
-            <th> Бюджет </th>
-            <th> Статус </th>
-            <th> Стоимость </th>
-            <th> Показы </th>
-            <th> Сред. цена за клик </th>
-            <th> Клики </th>
-            <th> Сред. цена </th>
+            <tr>
+              <th> Бюджет </th>
+              <th> Статус </th>
+              <th> Стоимость </th>
+              <th> Показы </th>
+              <th> Сред. цена за клик </th>
+              <th> Клики </th>
+              <th> Сред. цена </th>
+            </tr>
           </thead>
 
           <tbody>
-            <td> $50 в день </td>
-            <td> Приостановлен </td>
-            <td> $39.13 </td>
-            <td> 10 702 </td>
-            <td> $0.37 </td>
-            <td> 130 </td>
-            <td> $0.01 </td>
-
+            <tr>
+              <td> $50 в день </td>
+              <td> Приостановлен </td>
+              <td> $39.13 </td>
+              <td> 10 702 </td>
+              <td> $0.37 </td>
+              <td> 130 </td>
+              <td> $0.01 </td>
+            </tr>
           </tbody>
         </table>
       </div>
