@@ -8,15 +8,31 @@ import {
   TestAds,
 } from "@pages";
 import Heatmap from "@pages/Heatmap";
-
+import { initializeApp } from "@redux/app-reducer";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router";
 
-import "./App.less";
+import './App.less'
+import { selectInitialize } from "./selectors/app-selector";
 
-// ALMAZ BYL TUT
+
+
+
 
 const App = () => {
+
+  const dispatch = useDispatch();
+  const initialized = useSelector(selectInitialize);
+
+  React.useEffect(() => {
+    dispatch(initializeApp())
+  }, [dispatch])
+
+  if (!initialized) {
+    return <div></div>
+  }
+
   return (
     <div className="app-wrapper">
       <Route exact path="/" component={Main} />
@@ -32,7 +48,8 @@ const App = () => {
       <Route exact path="/test-iframe" component={TestIframe} />
       <Route exact path="/test-ads" component={TestAds} />
     </div>
-  );
-};
+  )
+}
+
 
 export default App;

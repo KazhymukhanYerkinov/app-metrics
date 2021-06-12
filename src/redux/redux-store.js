@@ -1,20 +1,13 @@
-import thunkMiddlewere from "redux-thunk";
-import {
-  applyMiddleware,
-  combineReducers,
-  createStore,
-} from "redux";
-import authReducer from "./auth-reducer";
-import oldKlikReducer from "./old-klik-reducer";
+import thunkMiddlewere from 'redux-thunk';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import authReducer from './auth-reducer';
+import appReducer from './app-reducer';
 
 let rootReducer = combineReducers({
   auth: authReducer,
-  oldKlik: oldKlikReducer,
+  app: appReducer,
 });
 
-let store = createStore(
-  rootReducer,
-  applyMiddleware(thunkMiddlewere)
-);
+let store = createStore(rootReducer, applyMiddleware(thunkMiddlewere));
 
 export default store;
