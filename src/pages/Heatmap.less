@@ -1,0 +1,62 @@
+.heatmap-content-wrap {
+  background: linear-gradient(
+    91.85deg,
+    #334169 0%,
+    rgba(23, 37, 78, 0.4) 100%
+  );
+  border: 1px solid #a8a4a4;
+
+  box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  width: 80%;
+  margin: 4rem auto;
+
+  .tabs-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    flex-grow: 1;
+    color: #fff;
+    transform: all 0.4s;
+    cursor: pointer;
+    overflow: auto;
+
+    .tab {
+      flex: 0 0 calc(100% / 6);
+      padding: 1rem;
+      text-align: center;
+      background: rgba(36, 47, 80, 1);
+      // text-overflow: ellipsis;
+      white-space: nowrap;
+      // overflow: hidden;
+
+      &:first-child {
+        border-top-left-radius: 15px;
+      }
+      &:last-child {
+        border-top-right-radius: 15px;
+      }
+
+      &:not(&:last-child) {
+        border-right: 1px solid #7a8ba7;
+      }
+
+      &:not(&--active) {
+        border-bottom: 1px solid #7a8ba7;
+      }
+
+      &--active {
+        background: inherit;
+      }
+
+      &:hover {
+        background: inherit;
+      }
+    }
+  }
+
+  .content {
+    padding: 2rem 5rem;
+  }
+}

@@ -27,7 +27,10 @@ import {
 
 import { oldKlikServer as server } from "@api/api";
 import classes from "./Heatmap.module.css";
+import "./Heatmap.less";
 import Toolbar from "@components/Toolbar";
+
+
 
 const createAttention = (e, height, items, settings) => {
   const getPoints = (start, height, items) => {
@@ -188,6 +191,14 @@ const tabs = [
     value: "attention",
     label: "Внимание",
   },
+  {
+    value: "geo",
+    label: "Гео",
+  },
+  {
+    value: "clickOut",
+    label: "Клик аут",
+  },
 ];
 
 const Heatmap = ({
@@ -198,6 +209,7 @@ const Heatmap = ({
   setDomains,
   setChecked,
 }) => {
+
   // 成功登录后获取的数据
   const [, setToast] = useToasts();
 
@@ -238,7 +250,7 @@ const Heatmap = ({
     : "";
   return (
     <>
-      <Toolbar />
+      {/* <Toolbar />
       <Page>
         <Page.Content>
           <Fieldset.Group
@@ -263,7 +275,54 @@ const Heatmap = ({
             ))}
           </Fieldset.Group>
         </Page.Content>
-      </Page>
+      </Page> */}
+
+      <div className="heatmap-content-wrap">
+        <div className="tabs-wrap">
+          {tabs.map((el) => (
+            <div
+              className={`tab ${
+                el.value === tab ? "tab--active" : ""
+              }`}
+              onClick={() => {
+                setTab(el.value);
+              }}
+            >
+              {el.label}
+            </div>
+          ))}
+        </div>
+        <div className="content">
+          {/* <Toolbar /> */}
+
+          {tabs.map((t) => {
+            if (tab === t.value) {
+              if (t.value === "geo") {
+                return (
+                  <div
+                    id="geo-chart"
+                    style={{
+                      width: "100%",
+                      height: "500px",
+                    }}
+                  ></div>
+                );
+              } else {
+                return (
+                  <Display
+                    type={t.value}
+                    domain={domain}
+                    date={date}
+                    filter={filter}
+                  />
+                );
+              }
+            } else {
+              return null;
+            }
+          })}
+        </div>
+      </div>
     </>
   );
 };
@@ -477,12 +536,12 @@ const Display = ({ type, domain, date, filter }) => {
   return (
     <div className={classes.Display}>
       <div className={classes.toolbar}>
-        <PageSelector
+        {/* <PageSelector
           page={page}
           setPage={setPage}
           domain={domain}
-        />
-        <ButtonGroup size="small">
+        /> */}
+        {/* <ButtonGroup size="small">
           <Button
             disabled={size.width === 380}
             onClick={() =>
@@ -505,7 +564,7 @@ const Display = ({ type, domain, date, filter }) => {
             }
             icon={<MonitorIcon />}
           />
-        </ButtonGroup>
+        </ButtonGroup> */}
       </div>
       <Spacer y={1} />
       <div
