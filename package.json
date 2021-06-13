@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@amcharts/amcharts4": "^4.10.19",
+    "@amcharts/amcharts4-geodata": "^4.1.20",
     "@geist-ui/react": "^2.1.0-canary.2",
     "@geist-ui/react-icons": "^1.0.1",
+    "add": "^2.0.6",
     "antd": "^4.11.2",
     "axios": "^0.21.1",
     "chart.js": "^3.3.2",
@@ -31,6 +33,7 @@
     "redux": "3.7.2",
     "redux-thunk": "^2.3.0",
     "shortid": "^2.2.16",
+    "yarn": "^1.22.10",
     "yup": "^0.32.9"
   },
   "devDependencies": {

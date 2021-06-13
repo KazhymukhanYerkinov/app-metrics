@@ -30,6 +30,14 @@ import classes from "./Heatmap.module.css";
 import "./Heatmap.less";
 import Toolbar from "@components/Toolbar";
 
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4maps from "@amcharts/amcharts4/maps";
+import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import shortid from "shortid";
+
+am4core.useTheme(am4themes_animated);
+
 const createAttention = (e, height, items, settings) => {
   const getPoints = (start, height, items) => {
     const validItems = items.filter(
@@ -245,39 +253,189 @@ const Heatmap = ({
   const domain = domains.items[selectedDomain]
     ? domains.items[selectedDomain].name
     : "";
+
+  // GEO Chart
+  let geoChart = am4core.create(
+    "geoChartDiv",
+    am4maps.MapChart
+  );
+  geoChart.geodata = am4geodata_worldLow;
+  geoChart.projection = new am4maps.projections.Miller();
+  let polygonSeries = geoChart.series.push(
+    new am4maps.MapPolygonSeries()
+  );
+  polygonSeries.exclude = ["AQ"];
+  polygonSeries.useGeodata = true;
+  let polygonTemplate = polygonSeries.mapPolygons.template;
+  polygonTemplate.tooltipText = "{name}";
+  polygonTemplate.polygon.fillOpacity = 0.6;
+  let hs = polygonTemplate.states.create("hover");
+  hs.properties.fill = geoChart.colors.getIndex(0);
+  let imageSeries = geoChart.series.push(
+    new am4maps.MapImageSeries()
+  );
+  imageSeries.mapImages.template.propertyFields.longitude =
+    "longitude";
+  imageSeries.mapImages.template.propertyFields.latitude =
+    "latitude";
+  imageSeries.mapImages.template.tooltipText = "{title}";
+  imageSeries.mapImages.template.propertyFields.url = "url";
+  let circle = imageSeries.mapImages.template.createChild(
+    am4core.Circle
+  );
+  circle.radius = 3;
+  circle.propertyFields.fill = "color";
+  circle.nonScaling = true;
+
+  let circle2 = imageSeries.mapImages.template.createChild(
+    am4core.Circle
+  );
+  circle2.radius = 3;
+  circle2.propertyFields.fill = "color";
+  circle2.events.on("inited", function (event) {
+    animateBullet(event.target);
+  });
+
+  function animateBullet(circle) {
+    let animation = circle.animate(
+      [
+        {
+          property: "scale",
+          from: 1 / geoChart.zoomLevel,
+          to: 5 / geoChart.zoomLevel,
+        },
+        { property: "opacity", from: 1, to: 0 },
+      ],
+      1000,
+      am4core.ease.circleOut
+    );
+    animation.events.on("animationended", function (event) {
+      animateBullet(event.target.object);
+    });
+  }
+
+  let colorSet = new am4core.ColorSet();
+  imageSeries.data = [
+    {
+      "title": "Brussels",
+      "latitude": 50.8371,
+      "longitude": 4.3676,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Copenhagen",
+      "latitude": 55.6763,
+      "longitude": 12.5681,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Paris",
+      "latitude": 48.8567,
+      "longitude": 2.351,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Reykjavik",
+      "latitude": 64.1353,
+      "longitude": -21.8952,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Moscow",
+      "latitude": 55.7558,
+      "longitude": 37.6176,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Madrid",
+      "latitude": 40.4167,
+      "longitude": -3.7033,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "London",
+      "latitude": 51.5002,
+      "longitude": -0.1262,
+      "url": "http://www.google.co.uk",
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Peking",
+      "latitude": 39.9056,
+      "longitude": 116.3958,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "New Delhi",
+      "latitude": 28.6353,
+      "longitude": 77.225,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Tokyo",
+      "latitude": 35.6785,
+      "longitude": 139.6823,
+      "url": "http://www.google.co.jp",
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Ankara",
+      "latitude": 39.9439,
+      "longitude": 32.856,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Buenos Aires",
+      "latitude": -34.6118,
+      "longitude": -58.4173,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Brasilia",
+      "latitude": -15.7801,
+      "longitude": -47.9292,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Ottawa",
+      "latitude": 45.4235,
+      "longitude": -75.6979,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Washington",
+      "latitude": 38.8921,
+      "longitude": -77.0241,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Kinshasa",
+      "latitude": -4.3369,
+      "longitude": 15.3271,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Cairo",
+      "latitude": 30.0571,
+      "longitude": 31.2272,
+      "color": colorSet.next(),
+    },
+    {
+      "title": "Pretoria",
+      "latitude": -25.7463,
+      "longitude": 28.1876,
+      "color": colorSet.next(),
+    },
+  ];
+
   return (
     <>
-      {/* <Toolbar />
-      <Page>
-        <Page.Content>
-          <Fieldset.Group
-            value={tab}
-            onChange={(v) => setTab(v)}
-          >
-            {tabs.map((t) => (
-              <Fieldset
-                label={t.label}
-                value={t.value}
-                key={t.value}
-              >
-                {tab === t.value ? (
-                  <Display
-                    type={t.value}
-                    domain={domain}
-                    date={date}
-                    filter={filter}
-                  />
-                ) : null}
-              </Fieldset>
-            ))}
-          </Fieldset.Group>
-        </Page.Content>
-      </Page> */}
       <Toolbar />
       <div className="heatmap-content-wrap">
         <div className="tabs-wrap">
           {tabs.map((el) => (
             <div
+              key={shortid.generate()}
               className={`tab ${
                 el.value === tab ? "tab--active" : ""
               }`}
@@ -297,7 +455,8 @@ const Heatmap = ({
               if (t.value === "geo") {
                 return (
                   <div
-                    id="geo-chart"
+                    key={shortid.generate()}
+                    id="geoChartDiv"
                     style={{
                       width: "100%",
                       height: "500px",
@@ -307,6 +466,7 @@ const Heatmap = ({
               } else {
                 return (
                   <Display
+                    key={shortid.generate()}
                     type={t.value}
                     domain={domain}
                     date={date}
@@ -517,6 +677,7 @@ const Display = ({ type, domain, date, filter }) => {
 
   useEffect(() => {
     window.addEventListener("resize", setSizeOfContainer);
+
     return () =>
       window.removeEventListener(
         "resize",
@@ -529,40 +690,11 @@ const Display = ({ type, domain, date, filter }) => {
       setSizeOfContainer();
     }
   }, [size.width]);
+
   const { palette, expressiveness } = useTheme();
   return (
     <div className={classes.Display}>
-      <div className={classes.toolbar}>
-        {/* <PageSelector
-          page={page}
-          setPage={setPage}
-          domain={domain}
-        /> */}
-        {/* <ButtonGroup size="small">
-          <Button
-            disabled={size.width === 380}
-            onClick={() =>
-              setSize({
-                width: 380,
-                height: 600,
-                scale: 1,
-              })
-            }
-            icon={<SmartphoneIcon />}
-          />
-          <Button
-            disabled={size.width === 1360}
-            onClick={() =>
-              setSize({
-                width: 1360,
-                height: 768,
-                scale: 1,
-              })
-            }
-            icon={<MonitorIcon />}
-          />
-        </ButtonGroup> */}
-      </div>
+      <div className={classes.toolbar}></div>
       <Spacer y={1} />
       <div
         style={{
