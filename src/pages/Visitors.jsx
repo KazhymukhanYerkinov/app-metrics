@@ -73,7 +73,7 @@ const getTime = (sec) => {
 const getDomain = (str) => {
   const regex =
     /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/gim;
-  console.log(str);
+  console.log("domain visitors:", str);
   const result = str.match(regex)[0];
   return result.indexOf("://")
     ? result.split("://")[1]
@@ -120,13 +120,7 @@ const Visitors = ({
     getDomains();
   }, []);
 
-  console.log(
-    domains,
-    selectedDomain,
-    filter,
-    date,
-    history
-  );
+  console.log("domains visitors: ", domains);
 
   const [visitors, setVisitors] = useState({
     isFetching: true,
@@ -181,7 +175,7 @@ const Visitors = ({
       method: "POST",
       data: fd,
     }).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data && typeof res.data === "object") {
         setVisitors({
           ...visitors,
@@ -228,7 +222,10 @@ const Visitors = ({
         <div className="video-list__body">
           {visitors.items.map((el) => {
             return (
-              <div key={shortid.generate()} className="body__item">
+              <div
+                key={shortid.generate()}
+                className="body__item"
+              >
                 <div className="item__text">
                   <div className="video-icon">
                     <svg

@@ -717,10 +717,18 @@ const IP = ({ open, handleClose, setIP, domain }) => {
             setIp("");
             handleClose();
           }}
-          options={ips.map((el) => ({
-            value: el,
-            label: el,
-          }))}
+          options={
+            Array.isArray(ips)
+              ? ips.map((el) => ({
+                  value: el,
+                  label: el,
+                }))
+              : null
+          }
+          // options={ips.map((el) => ({
+          // value: el,
+          // label: el,
+          // }))}
           placeholder="Выберите IP-адрес"
           onSearch={(v) => setIp(v)}
         >

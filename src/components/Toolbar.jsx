@@ -24,6 +24,8 @@ const Toolbar = ({
   date,
   setDate,
 }) => {
+  console.log("Toolbar: ", domains);
+
   const { palette } = useTheme();
   const [modal, setModal] = useState(false);
   const [state, setState] = useState({
