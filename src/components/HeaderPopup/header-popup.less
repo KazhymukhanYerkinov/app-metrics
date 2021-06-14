@@ -1,0 +1,35 @@
+.header-popup {
+    width: 100%;
+    background-color: #2A375D;
+    position: absolute;
+    top: 8vh;
+
+    display: none;
+
+    @media (max-width: 600px) {
+        display: block;
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: center;
+    }
+    &__routes {
+        padding: 20px 0;
+    }
+    &__route {
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+    &__name {
+        font-size: 16px;
+        line-height: 19px;
+        color: #fff;
+        margin-left: 10px;
+    }
+    &__image {
+        font-size: 24px;
+        color: #A0B1C7;
+    }
+}

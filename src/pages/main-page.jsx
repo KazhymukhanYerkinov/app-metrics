@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart, Funnel ,PieChart, BarChart, FunnelChart, Youtube,IframeVideo } from "@components";
+import { Header, Sidebar, LineChart, Funnel, PieChart, BarChart, FunnelChart, Youtube, IframeVideo } from "@components";
 
 
 let pie_chart_1_data = [61.41, 11.84, 10.85, 4.67, 4.18, 7.05];
@@ -15,62 +15,67 @@ let pie_chart_2_position = 'bottom';
 
 const Main = () => {
   return (
-    <React.Fragment>
+    <div className = 'main'>
+      <Header />
 
-      <div className = 'main'>
-        <LineChart 
-          fill = {false}
-          borderColor = '#F08C2F'
-        />
+      <div className = 'main__inner'>
+        <Sidebar />
+
+        <div className = 'main__content'>
+          <div className = 'main__block'>
+            <LineChart fill = {false} borderColor = '#F08C2F' />
+          </div>
+
+          <div className = 'main__block'>
+            <Funnel />
+          </div>
+
+          <div className = 'main__block'>
+            <PieChart
+              items = { pie_chart_1_data } 
+              labels = { pie_chart_1_labels }
+              colors = { pie_chart_1_colors }
+              position = { pie_chart_1_position }
+            />
+          </div>
+
+          <div className = 'main__block'>
+            <BarChart />
+          </div>
+
+          <div className = 'main__block'>
+            <PieChart
+              items = { pie_chart_2_data } 
+              labels = { pie_chart_2_labels }
+              colors = { pie_chart_2_colors }
+              position = { pie_chart_2_position }
+            />
+          </div>
+
+          <div className = 'main__block'>
+            <LineChart 
+              fill = {true}
+              borderColor = '#7CB5EC'
+            />
+          </div>
+
+          <div className = 'main__block'>
+            <FunnelChart />
+          </div>
+
+          <div className = 'main__block'>
+            <Youtube />
+          </div>
+
+          <div className = 'main__block'>
+            <IframeVideo />
+          </div>
+
+        </div>
+        
       </div>
 
-      <div className = 'main'>
-        <Funnel />
-      </div>
-
-      <div className = 'main'>
-        <PieChart
-          items = { pie_chart_1_data } 
-          labels = { pie_chart_1_labels }
-          colors = { pie_chart_1_colors }
-          position = { pie_chart_1_position }
-        />
-      </div>
-
-      <div className = 'main'>
-        <BarChart />
-      </div>
-
-      <div className = 'main'>
-        <PieChart
-          items = { pie_chart_2_data } 
-          labels = { pie_chart_2_labels }
-          colors = { pie_chart_2_colors }
-          position = { pie_chart_2_position }
-        />
-      </div>
-
-      <div className = 'main'>
-        <LineChart 
-          fill = {true}
-          borderColor = '#7CB5EC'
-        />
-      </div>
-
-      <div className = 'main'>
-        <FunnelChart />
-      </div>
-
-      <div className = 'main'>
-        <Youtube />
-      </div>
-
-      <div className = 'main'>
-        <IframeVideo />
-      </div>
-
-      
-    </React.Fragment>
+    </div>
     
   )
 };
