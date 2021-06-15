@@ -1,0 +1,54 @@
+.text-x-chart {
+  &__tabs {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    flex-grow: 1;
+    color: #fff;
+    transform: all 0.4s;
+    cursor: pointer;
+    overflow: auto;
+
+    .tabs__item {
+      flex: 0 0 calc(100% / 3);
+      height: 4.25rem;
+      padding: 1rem;
+      text-align: center;
+      background: rgba(36, 47, 80, 1);
+      // text-overflow: ellipsis;
+      white-space: nowrap;
+      //   overflow: hidden auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      &:first-child {
+        border-top-left-radius: 15px;
+      }
+      &:last-child {
+        border-top-right-radius: 15px;
+      }
+
+      &:not(&:last-child) {
+        border-right: 1px solid #7a8ba7;
+      }
+
+      &:not(&--active) {
+        border-bottom: 1px solid #7a8ba7;
+      }
+
+      &--active {
+        background: inherit;
+      }
+
+      &:hover {
+        background: inherit;
+      }
+    }
+  }
+
+  &__body {
+  }
+}

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Heatmap from "./Heatmap";
 import Visitors from "./Visitors";
 import { Button } from "antd";
-import { Popups } from "@components";
+import { Popups, TestXChart } from "@components";
 
 import "./test-x-page.less";
 
@@ -14,6 +14,7 @@ const TestXPage = () => {
     <div
       style={{
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -21,6 +22,13 @@ const TestXPage = () => {
       <Button onClick={() => setIsOpen(true)}>
         Click me!
       </Button>
+
+      <div
+        className=""
+        style={{ background: "black", padding: "1rem" }}
+      >
+        <TestXChart />
+      </div>
 
       <Popups isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="test-x">
