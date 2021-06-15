@@ -241,7 +241,77 @@ export const TestAds = (props) => {
           </div>
         </section>
       </div>
-      <Popups isOpen={isOpen} setIsOpen={setIsOpen}></Popups>
+      <Popups isOpen={isOpen} setIsOpen={setIsOpen}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
+            padding: "4rem",
+          }}
+        >
+          <div
+            className=""
+            style={{
+              backgroundColor: "black",
+              height: "30%",
+              marginBottom: "2rem",
+            }}
+          ></div>
+
+          <div
+            style={{
+              display: "flex",
+              height: "30%",
+            }}
+          >
+            <div
+              className=""
+              style={{ flexGrow: 2, height: "100%" }}
+            >
+              <div
+                className=""
+                style={{
+                  backgroundColor: "pink",
+                  height: "100%",
+                }}
+              ></div>
+            </div>
+            <div
+              className=""
+              style={{ width: "10px" }}
+            ></div>
+            <div
+              className=""
+              style={{
+                flexGrow: 1,
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+              }}
+            >
+              <div
+                className=""
+                style={{
+                  backgroundColor: "skyblue",
+                  height: "calc(calc(100% - 10px) / 2)",
+                }}
+              ></div>
+              <div
+                className=""
+                style={{ height: "10px" }}
+              ></div>
+              <div
+                className=""
+                style={{
+                  backgroundColor: "blue",
+                  height: "calc(calc(100% - 10px) / 2)",
+                }}
+              ></div>
+            </div>
+          </div>
+        </div>
+      </Popups>
     </>
   );
 };
