@@ -5,6 +5,7 @@ import {
   TestApi,
   TestIframe,
   TestAds,
+  TestX,
 } from "@pages";
 import Heatmap from "@pages/Heatmap";
 import Visitors from "@pages/Visitors";
@@ -43,6 +44,7 @@ const App = () => {
         component={TestIframe}
       />
       <Route exact path="/test-ads" component={TestAds} />
+      <Route exact path="/test-x" component={TestX} />
     </div>
   );
 };
