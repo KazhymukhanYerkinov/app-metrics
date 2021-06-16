@@ -29,20 +29,21 @@ export const TestAds = (props) => {
   // google cart company info
   useEffect(() => {
     axios({
-      method: "post",
-      url: "http://192.168.1.94:8000/google/campaign/",
-      data: {
-        user_type: "manager",
+      method: "get",
+      url: "http://192.168.1.83:1234/google/campaign/",
+      params: {
+        // user_type: "manager",
         access_id: "4783232548",
         client_id: "2066190552",
       },
       headers: {
         Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNjY3NTc1LCJqdGkiOiJhNjlmOTUyZGMzMzk0ZGIzYTI0NWEyZjI3YWNiZTcwMyIsInVzZXJfaWQiOjN9.3MAUUJZf-wg1f7YuJ9axQKULhx16OuuEK9xWRHlkmFg",
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI0MjUzODgzLCJqdGkiOiI1MTc5MTU2MzAyZWQ0ZWRjOGNjNmRmMjg4NjY5YjUzNCIsInVzZXJfaWQiOjJ9.5Wholp2H9ZHRCPjOb9yIXZ6ny31JEUv3-ajgV8nVXxo",
       },
     })
       .then((res) => {
-        setCompanys([...companys, ...res.data.campaigns]);
+        // console.log(res.data);
+        setCompanys([...res.data.campaigns]);
       })
       .catch((err) => {
         Object.keys(err).forEach((el) => {
@@ -55,27 +56,30 @@ export const TestAds = (props) => {
 
   // google cart info
   useEffect(() => {
-    axios
-      .get(
-        "http://192.168.1.94:8000/google/get-ad-details/",
-        {},
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjIzNzMyMTAzLCJqdGkiOiIxMzVjMGZlMWIyMDU0MjI2YWVhNjdkNjEwNDAwNWNhZCIsInVzZXJfaWQiOjJ9.ZsfidNJipObYbM8tLtGVUWNcwIab37ZeD5xyBG9UJZ8",
-          },
-        }
-      )
+    axios({
+      url: "http://192.168.1.83:1234/google/campaign/13446395457/card",
+      params: {
+        access_id: "4783232548",
+        client_id: "2066190552",
+      },
+
+      headers: {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI0MjUzODgzLCJqdGkiOiI1MTc5MTU2MzAyZWQ0ZWRjOGNjNmRmMjg4NjY5YjUzNCIsInVzZXJfaWQiOjJ9.5Wholp2H9ZHRCPjOb9yIXZ6ny31JEUv3-ajgV8nVXxo",
+      },
+    })
       .then((res) => {
+        // console.log(res.data);
         let responseData = {
-          crc: res.data.response[0].cpc,
-          ctr: res.data.response[0].ctr,
-          impressions: res.data.response[0].impressions,
-          views: res.data.response[0].views,
-          conversions: res.data.response[0].all_conversions,
-          cost: res.data.response[0].average_cost,
+          crc: res.data.response.cpc,
+          ctr: res.data.response.ctr,
+          impressions: res.data.response.impressions,
+          views: res.data.response.views,
+          conversions: res.data.response.all_conversions,
+          cost: res.data.response.average_cost,
         };
 
+        // console.log(responseData);
         setGoogleCardInfo(
           Object.assign({}, setGoogleCardInfo, responseData)
         );
@@ -83,7 +87,30 @@ export const TestAds = (props) => {
       .catch((err) => {
         console.log(err);
       });
-    return () => {};
+  }, []);
+
+  const [videoLink, setVideoLink] = useState("...");
+  // Google Video
+  useEffect(() => {
+    axios({
+      url: "http://192.168.1.83:1234/google/campaign/13446395457/video-link",
+      method: "get",
+      params: {
+        access_id: "4783232548",
+        client_id: "2066190552",
+      },
+      headers: {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjI0MjUzODgzLCJqdGkiOiI1MTc5MTU2MzAyZWQ0ZWRjOGNjNmRmMjg4NjY5YjUzNCIsInVzZXJfaWQiOjJ9.5Wholp2H9ZHRCPjOb9yIXZ6ny31JEUv3-ajgV8nVXxo",
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        setVideoLink(res.data.response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
 
   // Change Google company
@@ -110,12 +137,23 @@ export const TestAds = (props) => {
                     alt="google-logo"
                     className="about__brand"
                   />
-                  <video
+                  {/* <video
                     src={testVideo}
                     className="about__video"
                     autoPlay
                     loop
-                  ></video>
+                  ></video> */}
+                  <iframe
+                    // width="1536"
+                    // height="763"
+                    className="about__video"
+                    width="inherit"
+                    height="inherit"
+                    src={videoLink}
+                    title="YouTube video player"
+                    frameBorder="0"
+                    allow="autoplay; loop;"
+                  ></iframe>
                 </div>
               </Col>
               <Col span={16} style={{ height: "auto" }}>
@@ -179,11 +217,11 @@ export const TestAds = (props) => {
                             Conversions
                           </div>
                         </Col>
-                        <Col span={4}>
+                        {/* <Col span={4}>
                           <div className="head__text">
                             Cost
                           </div>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                     <div className="table__body">
@@ -225,13 +263,13 @@ export const TestAds = (props) => {
                               : "..."}
                           </div>
                         </Col>
-                        <Col span={4}>
+                        {/* <Col span={4}>
                           <div className="body__text">
                             {googleCardInfo.cost !== null
                               ? googleCardInfo.cost
                               : "..."}
                           </div>
-                        </Col>
+                        </Col> */}
                       </Row>
                     </div>
                   </div>
