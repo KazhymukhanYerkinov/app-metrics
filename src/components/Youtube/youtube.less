@@ -1,0 +1,91 @@
+.youtube {
+    width: 100%;
+    max-width: 900px;
+    
+
+    border-radius: 15px;
+    box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(91.85deg, #334169 50%, rgba(23, 37, 78, 0.8) 100%);
+
+    &__more-points {
+        font-size: 21px;
+    }
+    &__button {
+        width: 100%;
+        max-width: 120px;
+        height: 45px;
+        cursor: pointer;
+        border: none;
+        color: #ffffff;
+
+        font-family: Open Sans;
+        font-size: 14px;
+        line-height: 19px;
+        background: #242F50;
+        border-bottom: 1px solid #7A8BA7;
+
+        &--first {
+            border-top-left-radius: 15px;
+        }
+        &.active {
+            border-bottom: none;
+            background: linear-gradient(91.85deg, #334169 100%, rgba(23, 37, 78, 0.4) 100%); 
+        }
+    }
+
+    &__content {
+        padding: 15px 20px;
+        table {
+            width: 100%;
+
+            th {
+                padding: 10px 0;
+                color: white;
+                font-size: 12px;
+                line-height: 21px;
+                cursor: pointer;
+                text-align: left;
+                border-bottom: 2px solid #344768;
+            }
+
+            td {
+                padding: 10px 0;
+                font-size: 12px;
+                color: white;
+                line-height: 21px;
+                cursor: pointer;
+
+                border-bottom: 2px solid #344768;
+
+                img {
+                    margin-right: 10px;
+                }
+            }
+        }
+        
+        
+    }
+
+    &__footer {
+        padding: 10px 20px;
+    }
+    &__progress {
+        margin-top: 20px;
+        
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__trim {
+        padding: 0 20px;
+        height: 35px;
+        cursor: pointer;
+
+        color: #1B83F4;
+
+        border: none;
+        background-color: #fff;
+        box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 4px;
+    }
+}
