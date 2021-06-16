@@ -99,6 +99,7 @@ const Visitors = ({
     })
       .then((res) => {
         if (typeof res.data === "object") {
+          console.log("visitors data: ", res.data);
           setDomains(res.data);
           setChecked();
         } else {
