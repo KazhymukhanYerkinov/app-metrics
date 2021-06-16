@@ -1,122 +1,100 @@
-import React from 'react';
-import Highcharts from 'highcharts';
-import { DatePicker } from 'antd';
+import { Bar } from 'react-chartjs-2';
+import { DatePicker, TimePicker } from 'antd';
 import moment from 'moment';
+
 import 'antd/dist/antd.css';
+import React from 'react';
 
 const { RangePicker } = DatePicker;
 
-
 const BarChart = () => {
 
-  React.useEffect(() => {
-    Highcharts.chart('bar-chart', {
+  const [ picker, setPicker ] = React.useState(true);
 
-      chart: {
-        type: 'column',
-        backgroundColor: 'transparent',
-      },
-    
-      title: {
-        text: null
-      },
-    
-      subtitle: {
-        text: null
-      },
-    
+  const handlePicker = () => {
+    setPicker((prevState) => !prevState);
+  }
+  
+  let data = {
+    labels: ['21.01','22.01','23.01','24.01','25.01','26.01','27.01','28.01', '29.01','30.01','31.01','01.01' ],
+    datasets: [{
+      label: 'John',
+      data: [4.75, 6.25, 2.75, 4.25, 8, 8.50, 4.5, 6.25, 4.75, 6.25, 2.75, 4.25],
+      backgroundColor: ['#7CB5EC'],
+      borderColor: ['#7CB5EC'],
+    }]
+  }
+
+  let options = {
+    plugins: {
       legend: {
-        align: 'center',
-        itemStyle: {
-          color: '#ffffff'
-        }
-
-      },
-    
-      xAxis: {
-        categories: ['Apples', 'Oranges', 'Pears', 'Graps', 'Banans'],
+        position: 'bottom',
         labels: {
-          x: -10,
-          style: {
-            color: '#ffffff'
-          }
+          boxWidth: 15,
+          boxHeight: 15,
+          color: 'white',
+          usePointStyle: true,
         }
-      },
-    
-      yAxis: {
-        allowDecimals: false,
-        title: {
-          text: 'Values',
-          style: {
-            color: '#ffffff'
-          }
-        },
-        labels: {
-          style: {
-            color: '#ffffff',
-          }
-        }
-      },
-    
-      series: [{
-        name: 'Christmas Eve',
-        data: [1, 4, 3, 7, 2]
-      }],
-
-      credits: {
-        enabled: false
-      },
-    
-      responsive: {
-        rules: [{
-          condition: {
-            maxWidth: 500
-          },
-          chartOptions: {
-            legend: {
-              align: 'center',
-              verticalAlign: 'bottom',
-              layout: 'horizontal'
-            },
-            yAxis: {
-              labels: {
-                align: 'left',
-                x: 0,
-                y: -5
-              },
-              title: {
-                text: null
-              }
-            },
-            subtitle: {
-              text: null
-            },
-          }
-        }]
       }
-    });
-  }, []);
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: 'white',
+        }
+      },
+      y: {
+        ticks: {
+          color: 'white',
+        }
+      },
+    }
+  }
+
+  let items = [{name: 'Просмотры', count: '21586'},
+               {name: 'Клики', count: '3091'},
+               {name: 'Пользователей', count: '1796'},
+               {name: 'Просмотры страниц', count: '123'},
+               {name: 'Сред. пр.', count: '35.9'},
+               {name: 'Конверсия из просмотра в клик', count: '549'},
+               {name: 'Конверсия из клика в заявку', count: '549'},]
 
   const dateFormat = 'YYYY/MM/DD';
 
   return (
     <div className = 'bar-chart'>
+
       <div className = 'bar-chart__header'>
         <div className = 'bar-chart__title'> Traffic overview </div>
 
-        <div className = 'bar-chart__pickers'>
-          <RangePicker
-            className = 'progressive-chart__date'
+        <div className = 'bar-chart__date'>
+          {picker ? <RangePicker
             defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
             format={dateFormat}
-          />
-          <button className = 'bar-chart__time'> Отображать по | Часам </button>
+          /> :
+           <TimePicker.RangePicker />}
+          <button className = 'bar-chart__picker' onClick = { handlePicker }> Отображать по | {picker ? 'Часам': 'Дням'} </button>
         </div>
       </div>
+      <div className = 'bar-chart__content'>
+        <div className = 'bar-chart__figure'>
+          <Bar data = { data } options = { options } />
+        </div>
 
-      <div className = 'bar-chart__figure' id = 'bar-chart'></div>
+        <div className = 'bar-chart__table'>
+          { items.map((item, index) => (
+            <div className = 'bar-chart__items' key = { index }>
+              <div> { item.name } </div>
+              <div> { item.count } </div>
+            </div>
+          )) }
+          
+        </div>
+      </div>
+      
+      
     </div>
-  )
+  );
 }
 
 export default BarChart;

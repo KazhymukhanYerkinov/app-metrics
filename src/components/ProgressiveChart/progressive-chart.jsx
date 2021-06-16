@@ -1,94 +1,71 @@
 import React from 'react';
-import Highcharts from 'highcharts';
 import { DatePicker } from 'antd';
 import moment from 'moment';
+import { Line } from 'react-chartjs-2';
 import { data } from 'src/data';
 
 import 'antd/dist/antd.css';
 
 const { RangePicker } = DatePicker;
 
-const LineChart = () => {
 
-  React.useEffect(() => {
-    Highcharts.chart("ad-conversion-chart", {
-      chart: {
-        zoomType: "x",
-        backgroundColor: 'transparent',
-      },
-      title: {
-        text: null,
-      },
-      subtitle: {
-        text: null,
-      },
-      xAxis: {
-        labels: {
-          style: {
-            color: '#ffffff'
-          }
-        },
-        type: "datetime",
-      },
-      yAxis: {
-        labels: {
-          style: {
-            color: '#ffffff'
-          }
-        },
-        title: {
-          text: null,
-        },
-      },
-      legend: {
-        enabled: false,
+const LineChart = ({ fill, borderColor }) => {
+
+  const [startTime, setStartTime] = React.useState(0);
+  const [endTime, setEndTime] = React.useState(0);
+
+  const getDate = (value, dateString) => {
+    let start = new Date(dateString[0]);
+    let end = new Date(dateString[1]);
+
+    setStartTime(Number(start.getTime()));
+    setEndTime(Number(end.getTime()))
+  
+  }
+
+  let lineData = {
+    datasets: [{
+      borderColor: borderColor,
+      borderWidth: 1,
+      radius: 0,
+      data: data,
+      fill: fill,
+    }]
+  }
+
+  let lineOptions = {
+    plugins: {
+      legend: false
+    },
+    scales: {
+      x: {
         
-      },
-      plotOptions: {
-        area: {
-          fillColor: {
-            linearGradient: {
-              x1: 0,
-              y1: 0,
-              x2: 0,
-              y2: 1,
-            },
-            stops: [
-              [0, Highcharts.getOptions().colors[0]],
-              [
-                1,
-                Highcharts.color(
-                  Highcharts.getOptions().colors[0]
-                )
-                  .setOpacity(0)
-                  .get("rgba"),
-              ],
-            ],
+        min: startTime,
+        max: endTime,
+        grid: {
+          display: false
+        },
+        type: 'linear',
+        ticks: {
+          color: 'white',
+          callback: function(value, index, values) {
+            let date = new Date(value);
+            if (index === 0) {
+              return;
+            }
+            return date.getFullYear();
           },
-          marker: {
-            radius: 2,
-          },
-          lineWidth: 1,
-          states: {
-            hover: {
-              lineWidth: 1,
-            },
-          },
-          threshold: null,
         },
       },
-      
-      series: [
-        {
-          type: "area",
-          name: "Ad conversion",
-          data: data,
-        },
-      ],
-    });
-  }, []);
+      y: {
+        ticks: {
+          color: 'white'
+        }
+      }
+    }
+  }
 
-  const dateFormat = 'YYYY/MM/DD';
+  const dateFormat = 'DD.MM.YYYY';
   
   return (
     <div className = 'progressive-chart'>
@@ -96,12 +73,14 @@ const LineChart = () => {
         <div className = 'progressive-chart__title'> Ad conversion </div>
 
         <RangePicker
+          onChange = { getDate }
           className = 'progressive-chart__date'
-          defaultValue={[moment('2015/01/01', dateFormat), moment('2015/01/01', dateFormat)]}
+          defaultValue={[moment('01.02.2021', dateFormat), moment('01.03.2021', dateFormat)]}
           format={dateFormat}
         />
       </div>
-      <div className = 'progressive-chart__figure' id = 'ad-conversion-chart'></div>
+
+      <Line data = { lineData } options = { lineOptions }/>
     </div>
   )
   

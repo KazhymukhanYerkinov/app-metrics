@@ -1,28 +1,43 @@
 .bar-chart {
-    margin-top: 50px;
-    margin-left: 55px;
-
-    padding: 30px 20px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 950px;
     
+    padding: 30px 40px 10px; 
     border-radius: 15px;
     box-shadow: 5px 10px 20px rgba(0, 0, 0, 0.25);
     background: linear-gradient(91.85deg, #334169 50%, rgba(23, 37, 78, 0.8) 100%);
 
-    &__figure {
-        padding-top: 30px;
+    &__content {
+        padding: 20px 0;
 
-        width: 100%;
-        max-width: 600px;
-        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__figure {
+        width: 60%;
+    }
+    &__table {
+        width: 35%;
+    }
+    &__items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 7px;
+        cursor: pointer;
+
+        border-bottom: 2px solid #344768;
     }
     &__header {
         display: flex;
         align-items: center;
         justify-content: space-between;
 
-        padding: 20px 20px;
+        margin-bottom: 50px;
     }
     &__title {
         font-size: 18px;
@@ -30,15 +45,17 @@
         font-weight: 700;
         color: #fff;
     }
-    &__time {
+    &__picker {
         margin-left: 20px;
 
         height: 35px;
         color: #fff;
+        font-size: 13px;
         background-color: transparent;
         border: 1px solid #B5AAAA;
         box-sizing: border-box;
         border-radius: 4px;
         cursor: pointer;
     }
+    
 }
