@@ -23,13 +23,6 @@ const TestXPage = () => {
         Click me!
       </Button>
 
-      <div
-        className=""
-        style={{ background: "black", padding: "1rem" }}
-      >
-        <TestXChart />
-      </div>
-
       <Popups isOpen={isOpen} setIsOpen={setIsOpen}>
         <div className="test-x">
           <div className="test-x__row-box">
@@ -37,7 +30,9 @@ const TestXPage = () => {
               <Heatmap />
             </div>
 
-            <div className="chart-container"></div>
+            <div className="chart-container">
+              <TestXChart />
+            </div>
           </div>
 
           <div className="video-container">
