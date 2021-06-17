@@ -7,8 +7,8 @@ import {
   TestAds,
   TestX,
 } from "@pages";
-import Heatmap from "@pages/Heatmap";
-import Visitors from "@pages/Visitors";
+import Heatmap from "@pages/OldKlikPages/Heatmap";
+import Visitors from "@pages/OldKlikPages/Visitors";
 
 import { initializeApp } from "@redux/app-reducer";
 import React from "react";
