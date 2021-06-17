@@ -1,5 +1,6 @@
 import {
   Main,
+  OldMain,
   Login,
   Register,
   TestApi,
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <div className="app-wrapper">
       <Route exact path="/" component={Main} />
+      <Route exact path="/om" component={OldMain} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/heatmap" component={Heatmap} />
