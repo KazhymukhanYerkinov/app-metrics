@@ -8,8 +8,9 @@ export { default as Youtube } from './Youtube/youtube';
 export { default as IframeVideo } from './IframeVideo/iframe-video';
 export { default as Header } from './Header/header';
 export { default as Sidebar } from './Sidebar/sidebar';
-// Yernar Components ↓
-export { default as Popups } from './Popups';
-export { default as TestXChart } from './TestXChart';
-export { default as TrafficOverviewChart } from './TrafficOverviewChart';
 
+// Yernar Components ↓
+export { default as Popups } from '@components/Popups';
+export { default as TestXChart } from '@components/TestXChart';
+export { default as TrafficOverviewChart } from '@components/TrafficOverviewChart';
+export { default as GoogleAdsCard } from '@components/GoogleAdsCard';

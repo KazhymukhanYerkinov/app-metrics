@@ -40,6 +40,8 @@ let pie_chart_2_colors = ["#7486E7", "#F4F7F9", "#1B7FF5"];
 let pie_chart_2_position = "bottom";
 
 const Main = () => {
+
+  // 重写页面
   return (
     <div className="main">
       <Header />

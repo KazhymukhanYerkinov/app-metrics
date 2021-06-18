@@ -5,11 +5,10 @@ import {
   Register,
   TestApi,
   TestIframe,
-  TestAds,
   TestX,
 } from "@pages";
-import Heatmap from "@pages/OldKlikPages/Heatmap";
-import Visitors from "@pages/OldKlikPages/Visitors";
+
+import { Heatmap, Visitors } from "@pages/OldKlikPages";
 
 import { initializeApp } from "@redux/app-reducer";
 import React from "react";
@@ -45,7 +44,6 @@ const App = () => {
         path="/test-iframe"
         component={TestIframe}
       />
-      <Route exact path="/test-ads" component={TestAds} />
       <Route exact path="/test-x" component={TestX} />
     </div>
   );

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
 
 import { Row, Col } from "antd";
 import { Select } from "antd";
@@ -8,13 +7,12 @@ import { Popups } from "@components";
 import axios from "axios";
 
 import googleLogo from "@assets/google-logo.jpg";
-import testVideo from "@assets/testvideo.mp4";
 
-import "./test-ads-page.less";
+import "./index.less";
 
 const { Option } = Select;
 
-export const TestAds = (props) => {
+export default function GoogleAds() {
   const [googleCardInfo, setGoogleCardInfo] = useState({
     crc: null,
     ctr: null,
@@ -352,13 +350,4 @@ export const TestAds = (props) => {
       </Popups>
     </>
   );
-};
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TestAds);
+}
