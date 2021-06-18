@@ -10,6 +10,7 @@ export { default as Header } from "./Header/header";
 export { default as Sidebar } from "./Sidebar/sidebar";
 
 // Yernar Components ↓
+export { default as PageTemplate } from "@components/PageTemplate";
 export { default as Popups } from "@components/Popups";
 export { default as TestXChart } from "@components/TestXChart";
 export { default as TrafficOverviewChart } from "@components/TrafficOverviewChart";

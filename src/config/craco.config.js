@@ -25,6 +25,7 @@ module.exports = {
       "@pages": path.resolve("src/pages"),
       "@redux": path.resolve("src/redux"),
       "@utils": path.resolve("src/utils"),
+      "@data": path.resolve("src/data"),
     },
   },
 

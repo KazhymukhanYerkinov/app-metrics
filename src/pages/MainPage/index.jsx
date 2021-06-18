@@ -1,7 +1,9 @@
 import React from "react";
+
+import { Row, Col } from "antd";
 import {
-  Header,
-  Sidebar,
+  // Header,
+  // Sidebar,
   // LineChart,
   // Funnel,
   // PieChart,
@@ -9,6 +11,8 @@ import {
   // FunnelChart,
   // Youtube,
   // IframeVideo,
+  PageTemplate,
+  GoogleAdsCard,
 } from "@components";
 
 import "./index.less";
@@ -42,64 +46,74 @@ import "./index.less";
 const Main = () => {
   // 重写页面
   return (
-    <div className="main">
-      <Header />
+    <PageTemplate>
+      <Row justify="space-between" gutter={[0, 20]}>
+        <Col sm={24} md={11}>
+          <GoogleAdsCard />
+        </Col>
+        <Col sm={24} md={11}>
+          <GoogleAdsCard />
+        </Col>
+      </Row>
+    </PageTemplate>
+    // <div className="main">
+    //   <Header />
 
-      <div className="main__inner">
-        <Sidebar />
+    //   <div className="main__inner">
+    //     <Sidebar />
 
-        <div className="main__content">
-          {/* <div className = 'main__block'>
-            <LineChart fill = {false} borderColor = '#F08C2F' />
-          </div>
+    //     <div className="main__content">
+    //       <div className = 'main__block'>
+    //         <LineChart fill = {false} borderColor = '#F08C2F' />
+    //       </div>
 
-          <div className = 'main__block'>
-            <Funnel />
-          </div>
+    //       <div className = 'main__block'>
+    //         <Funnel />
+    //       </div>
 
-          <div className = 'main__block'>
-            <PieChart
-              items = { pie_chart_1_data } 
-              labels = { pie_chart_1_labels }
-              colors = { pie_chart_1_colors }
-              position = { pie_chart_1_position }
-            />
-          </div>
+    //       <div className = 'main__block'>
+    //         <PieChart
+    //           items = { pie_chart_1_data }
+    //           labels = { pie_chart_1_labels }
+    //           colors = { pie_chart_1_colors }
+    //           position = { pie_chart_1_position }
+    //         />
+    //       </div>
 
-          <div className = 'main__block'>
-            <BarChart />
-          </div>
+    //       <div className = 'main__block'>
+    //         <BarChart />
+    //       </div>
 
-          <div className = 'main__block'>
-            <PieChart
-              items = { pie_chart_2_data } 
-              labels = { pie_chart_2_labels }
-              colors = { pie_chart_2_colors }
-              position = { pie_chart_2_position }
-            />
-          </div>
+    //       <div className = 'main__block'>
+    //         <PieChart
+    //           items = { pie_chart_2_data }
+    //           labels = { pie_chart_2_labels }
+    //           colors = { pie_chart_2_colors }
+    //           position = { pie_chart_2_position }
+    //         />
+    //       </div>
 
-          <div className = 'main__block'>
-            <LineChart 
-              fill = {true}
-              borderColor = '#7CB5EC'
-            />
-          </div>
+    //       <div className = 'main__block'>
+    //         <LineChart
+    //           fill = {true}
+    //           borderColor = '#7CB5EC'
+    //         />
+    //       </div>
 
-          <div className = 'main__block'>
-            <FunnelChart />
-          </div>
+    //       <div className = 'main__block'>
+    //         <FunnelChart />
+    //       </div>
 
-          <div className = 'main__block'>
-            <Youtube />
-          </div>
+    //       <div className = 'main__block'>
+    //         <Youtube />
+    //       </div>
 
-          <div className = 'main__block'>
-            <IframeVideo />
-          </div> */}
-        </div>
-      </div>
-    </div>
+    //       <div className = 'main__block'>
+    //         <IframeVideo />
+    //       </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
