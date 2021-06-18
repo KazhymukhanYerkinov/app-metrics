@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import axios from "axios";
+// import axios from "axios";
 
-import { Row, Col } from "antd";
+// import { Row, Col } from "antd";
 
 import "./test-iframe-page.less";
 import shortid from "shortid";
@@ -13,7 +13,7 @@ export const TestIframe = (props) => {
   const [iframeDataIndex, setIframeDataIndex] = useState([
     0, 3,
   ]);
-  const [iframeData, setIframeData] = useState([
+  const [iframeData, ,] = useState([
     {
       siteURL: "http://klikmetrics.ru/",
       numberOfVisits: 12432,

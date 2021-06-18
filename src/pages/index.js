@@ -8,3 +8,7 @@ export { default as Main } from "@pages/MainPage";
 export { default as TestApi } from "@pages/test-api-page";
 export { default as TestIframe } from "@pages/test-iframe-page";
 export { default as TestX } from "@pages/test-x-page";
+
+// Old Klik Pages ↓
+export { default as Heatmap } from "@pages/OldKlikPages/HeatmapPage";
+export { default as Visitors } from "@pages/OldKlikPages/VisitorsPage";

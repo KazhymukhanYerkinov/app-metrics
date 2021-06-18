@@ -2,7 +2,7 @@ import React from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import { Line } from 'react-chartjs-2';
-import { data } from 'src/data';
+import { data } from 'src/data/data';
 
 import 'antd/dist/antd.css';
 

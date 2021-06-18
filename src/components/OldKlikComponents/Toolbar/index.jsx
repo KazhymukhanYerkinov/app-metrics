@@ -12,9 +12,8 @@ import MomentLocaleUtils from "react-day-picker/moment";
 import { selectDomain, setDate } from "@redux/actions";
 import { Calendar as CalendarIcon } from "@geist-ui/react-icons";
 import moment from "moment";
-import Site from "./Site";
 import classes from "./Toolbar.module.css";
-import Filter from "@components/Filter";
+import { Filter, Site } from "@components";
 import { useState } from "react";
 
 const Toolbar = ({

@@ -1,9 +1,9 @@
 import {
   AutoComplete,
-  Button,
-  ButtonGroup,
-  Fieldset,
-  Page,
+  // Button,
+  // ButtonGroup,
+  // Fieldset,
+  // Page,
   Spacer,
   useTheme,
   useToasts,
@@ -14,27 +14,29 @@ import {
   useLayoutEffect,
   useRef,
   useState,
+  // useMemo,
 } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setDomains, setChecked } from "@redux/actions";
 import axios from "axios";
 import h337 from "heatmap.js";
-import {
-  Monitor as MonitorIcon,
-  Smartphone as SmartphoneIcon,
-} from "@geist-ui/react-icons";
+import // Monitor as MonitorIcon,
+// Smartphone as SmartphoneIcon,
+"@geist-ui/react-icons";
 
 import { oldKlikServer as server } from "@api/api";
-import classes from "./Heatmap.module.css";
-import "./Heatmap.less";
-import Toolbar from "@components/Toolbar";
+
+import { Toolbar } from "@components";
 
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodata_worldLow from "@amcharts/amcharts4-geodata/worldLow";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import shortid from "shortid";
+
+import classes from "./Heatmap.module.css";
+import "./index.less";
 
 am4core.useTheme(am4themes_animated);
 
@@ -508,17 +510,17 @@ const Heatmap = ({
 
 const Display = ({ type, domain, date, filter }) => {
   const [dateStart, dateEnd] = date;
-  const [page, setPage] = useState("/");
-  const [prePage, setPrePage] = useState("/");
+  const [page, ,] = useState("/");
+  // const [prePage, ,] = useState("/");
   const [loaded, setLoaded] = useState(false);
-  const [data, setData] = useState({
+  const [, setData] = useState({
     isFetching: true,
     items: [],
   });
-  const [scroll, setScroll] = useState(0);
+  // const [scroll, setScroll] = useState(0);
   const [done, setDone] = useState(false);
   const [height, setHeight] = useState(768);
-  const [size, setSize] = useState({
+  const [size, ,] = useState({
     width: 1360,
     height: 768,
     scale: 1,
@@ -630,7 +632,22 @@ const Display = ({ type, domain, date, filter }) => {
         }
       }
     });
-  }, [page]);
+  }, [
+    page,
+    domain,
+    date,
+    filter.countries,
+    filter.ip,
+    filter.pages,
+    filter.referrers,
+    filter.sessionMax,
+    filter.sessionMin,
+    filter.tags,
+    makeAttention,
+    makeScroll,
+    size.width,
+    type,
+  ]);
 
   const scrollHeatmap = (x, y) => {
     heatmapWrap.current.scrollTo(x, y);
@@ -695,7 +712,7 @@ const Display = ({ type, domain, date, filter }) => {
     }
     setLoaded(true);
     setSizeOfContainer();
-  }, [page]);
+  }, [setSizeOfContainer, setLoaded]);
 
   useEffect(() => {
     window.addEventListener("resize", setSizeOfContainer);
@@ -705,7 +722,7 @@ const Display = ({ type, domain, date, filter }) => {
         "resize",
         setSizeOfContainer
       );
-  }, []);
+  }, [setSizeOfContainer]);
 
   useLayoutEffect(() => {
     if (loaded) {

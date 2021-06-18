@@ -1,84 +1,84 @@
 import classes from "./Visitors.module.css";
 import {
-  Badge,
-  Button,
-  Card,
-  Code,
-  Page,
-  Pagination,
-  Spacer,
-  Table,
-  Tag,
-  Text,
+  // Badge,
+  // Button,
+  // Card,
+  // Code,
+  // Page,
+  // Pagination,
+  // Spacer,
+  // Table,
+  // Tag,
+  // Text,
   useToasts,
 } from "@geist-ui/react";
-import Toolbar from "@components/Toolbar";
+import {Toolbar} from "@components";
 import { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { setDomains, setChecked } from "@redux/actions";
 import axios from "axios";
 import { oldKlikServer as server } from "@api/api";
 import {
-  ChevronLeft,
-  ChevronRight,
-  PlayCircle,
+  // ChevronLeft,
+  // ChevronRight,
+  // PlayCircle,
 } from "@geist-ui/react-icons";
 import moment from "moment";
 import "moment/locale/ru";
 
-import { Smartphone } from "@geist-ui/react-icons";
-import chrome from "@assets/icons/chrome.svg";
-import safari from "@assets/icons/safari.svg";
-import mozilla from "@assets/icons/mozilla.svg";
-import opera from "@assets/icons/opera.svg";
-import msie from "@assets/icons/msie.svg";
+// import { Smartphone } from "@geist-ui/react-icons";
+// import chrome from "@assets/icons/chrome.svg";
+// import safari from "@assets/icons/safari.svg";
+// import mozilla from "@assets/icons/mozilla.svg";
+// import opera from "@assets/icons/opera.svg";
+// import msie from "@assets/icons/msie.svg";
 import { connect } from "react-redux";
 
-import "./Visitors.less";
+import "./index.less";
 import shortid from "shortid";
 
 moment.locale("ru");
 
-const browsers = {
-  chrome: <img alt="Chrome" src={chrome} />,
-  mozilla: <img alt="Firefox" src={mozilla} />,
-  firefox: <img alt="Firefox" src={mozilla} />,
-  safari: <img alt="Safari" src={safari} />,
-  opera: <img alt="Opera" src={opera} />,
-  msie: <img alt="Internet Explorer" src={msie} />,
-  mobile: <Smartphone />,
-};
+// const browsers = {
+//   chrome: <img alt="Chrome" src={chrome} />,
+//   mozilla: <img alt="Firefox" src={mozilla} />,
+//   firefox: <img alt="Firefox" src={mozilla} />,
+//   safari: <img alt="Safari" src={safari} />,
+//   opera: <img alt="Opera" src={opera} />,
+//   msie: <img alt="Internet Explorer" src={msie} />,
+//   mobile: <Smartphone />,
+// };
 
-function countryToFlag(isoCode) {
-  return typeof String.fromCodePoint !== "undefined"
-    ? isoCode
-        .toUpperCase()
-        .replace(/./g, (char) =>
-          String.fromCodePoint(char.charCodeAt(0) + 127397)
-        )
-    : isoCode;
-}
+// function countryToFlag(isoCode) {
+//   return typeof String.fromCodePoint !== "undefined"
+//     ? isoCode
+//         .toUpperCase()
+//         .replace(/./g, (char) =>
+//           String.fromCodePoint(char.charCodeAt(0) + 127397)
+//         )
+//     : isoCode;
+// }
 
-const pad2 = (n) => (n > 9 ? n : `0${n}`);
+// const pad2 = (n) => (n > 9 ? n : `0${n}`);
 
-const getTime = (sec) => {
-  const hours = Math.floor(sec / 3600);
-  const minutes = Math.floor((sec - hours * 3600) / 60);
-  const seconds = sec % 60;
-  return `${hours ? pad2(hours) + ":" : ""}${
-    hours && !minutes ? "00:" : `${pad2(minutes)}:`
-  }${pad2(seconds)}`;
-};
+// const getTime = (sec) => {
+//   const hours = Math.floor(sec / 3600);
+//   const minutes = Math.floor((sec - hours * 3600) / 60);
+//   const seconds = sec % 60;
+//   return `${hours ? pad2(hours) + ":" : ""}${
+//     hours && !minutes ? "00:" : `${pad2(minutes)}:`
+//   }${pad2(seconds)}`;
+// };
 
-const getDomain = (str) => {
-  const regex =
-    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/gim;
-  console.log("domain visitors:", str);
-  const result = str.match(regex)[0];
-  return result.indexOf("://")
-    ? result.split("://")[1]
-    : result;
-};
+// const getDomain = (str) => {
+//   const regex =
+//     /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/gim;
+//   console.log("domain visitors:", str);
+//   const result = str.match(regex)[0];
+//   return result.indexOf("://")
+//     ? result.split("://")[1]
+//     : result;
+// };
 
 const Visitors = ({
   domains,
@@ -187,12 +187,12 @@ const Visitors = ({
       }
     });
   };
-  useEffect(getVisitors, [
-    visitors.page,
-    date,
-    visitors.perPage,
-    filter,
-  ]);
+  // useEffect(getVisitors, [
+    // visitors.page,
+    // date,
+    // visitors.perPage,
+    // filter,
+  // ]);
   useEffect(() => {
     if (visitors.page === 0) {
       getVisitors();

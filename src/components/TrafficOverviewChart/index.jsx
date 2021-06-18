@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Highcharts from "highcharts";
-import { data } from "src/data";
+import { data } from "src/data/data";
 
 import "./index.less";
 

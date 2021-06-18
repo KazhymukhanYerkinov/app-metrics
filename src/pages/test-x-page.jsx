@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-import Heatmap from "./OldKlikPages/Heatmap";
-import Visitors from "./OldKlikPages/Visitors";
 import { Button } from "antd";
+import { Heatmap, Visitors } from "@pages";
 import { Popups, TestXChart } from "@components";
 
 import "./test-x-page.less";
