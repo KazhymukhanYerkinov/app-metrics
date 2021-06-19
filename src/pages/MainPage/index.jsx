@@ -44,7 +44,6 @@ import "./index.less";
 // let pie_chart_2_position = "bottom";
 
 const Main = () => {
-  // 重写页面
   return (
     <PageTemplate>
       <Row justify="space-between" gutter={[0, 20]}>
