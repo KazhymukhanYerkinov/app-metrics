@@ -6,9 +6,6 @@ import {
   Funnel,
   PieChart,
   BarChart,
-  // FunnelChart,
-  // Youtube,
-  // IframeVideo,
   PageTemplate,
   GoogleAdsCard,
 } from "@components";
@@ -38,11 +35,6 @@ let pie_chart_1_colors = [
 ];
 let pie_chart_1_position = "right";
 
-// let pie_chart_2_data = [10, 10, 80];
-// let pie_chart_2_labels = ["ПК", "Планшет", "Мобильный"];
-// let pie_chart_2_colors = ["#7486E7", "#F4F7F9", "#1B7FF5"];
-// let pie_chart_2_position = "bottom";
-
 const Main = () => {
   return (
     <PageTemplate>
@@ -58,6 +50,10 @@ const Main = () => {
             </Col>
           </Row>
         </Col>
+        <div
+          className=""
+          style={{ width: "100%", height: "0.5rem" }}
+        ></div>
         {/* iframes */}
         <Col span={24}>
           <TestIframe />
@@ -77,6 +73,10 @@ const Main = () => {
             </Col>
           </Row>
         </Col>
+        <div
+          className=""
+          style={{ width: "100%", height: "0.5rem" }}
+        ></div>
         {/* Traffic overview & some chart */}
         <Col span={24}>
           <Row justify="space-between" gutter={[0, 12]}>
@@ -93,43 +93,12 @@ const Main = () => {
             </Col>
           </Row>
         </Col>
+        <div
+          className=""
+          style={{ width: "100%", height: "0.5rem" }}
+        ></div>
       </Row>
     </PageTemplate>
-
-    //       <div className = 'main__block'>
-    //         <BarChart />
-    //       </div>
-
-    //       <div className = 'main__block'>
-    //         <PieChart
-    //           items = { pie_chart_2_data }
-    //           labels = { pie_chart_2_labels }
-    //           colors = { pie_chart_2_colors }
-    //           position = { pie_chart_2_position }
-    //         />
-    //       </div>
-
-    //       <div className = 'main__block'>
-    //         <LineChart
-    //           fill = {true}
-    //           borderColor = '#7CB5EC'
-    //         />
-    //       </div>
-
-    //       <div className = 'main__block'>
-    //         <FunnelChart />
-    //       </div>
-
-    //       <div className = 'main__block'>
-    //         <Youtube />
-    //       </div>
-
-    //       <div className = 'main__block'>
-    //         <IframeVideo />
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   );
 };
 
