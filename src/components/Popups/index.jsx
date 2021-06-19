@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
 
 import "./index.less";
 
@@ -7,7 +8,19 @@ export default function Popups({
   setIsOpen,
   children,
 }) {
-  return (
+  let popupsNode =
+    document.getElementsByClassName("popups-node")[0];
+
+  if (!popupsNode) {
+    popupsNode = document.createElement("div");
+    popupsNode.setAttribute("class", "popups-node");
+  }
+
+  useEffect(() => {
+    document.body.appendChild(popupsNode);
+  });
+
+  return createPortal(
     <div
       className={`popups-wrap ${
         isOpen ? "popups-wrap--active" : ""
@@ -39,8 +52,11 @@ export default function Popups({
             </svg>
           </div>
         </div>
-        {children}
+        <div className="popups__chidren-wrap">
+          {children}
+        </div>
       </div>
-    </div>
+    </div>,
+    popupsNode
   );
 }

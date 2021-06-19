@@ -1,5 +1,5 @@
 .popups-wrap {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,7 +48,6 @@
     left: 0;
     opacity: 0;
     transition: all 0.4s;
-    overflow: hidden auto;
 
     .popups__close-btn-wrap {
       width: 100%;
@@ -67,6 +66,12 @@
           vertical-align: middle;
         }
       }
+    }
+
+    .popups__chidren-wrap {
+      width: 100%;
+      height: 95%;
+      overflow: hidden auto;
     }
   }
 }
