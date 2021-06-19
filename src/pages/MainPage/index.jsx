@@ -64,7 +64,7 @@ const Main = () => {
         ></div>
         {/* Funnel Revence & Ad conversion */}
         <Col span={24}>
-          <Row justify="space-between" gutter={[0, 12]}>
+          <Row justify="space-between" gutter={[0, 24]}>
             <Col sm={24} md={9}>
               <Funnel />
             </Col>
@@ -79,11 +79,11 @@ const Main = () => {
         ></div>
         {/* Traffic overview & some chart */}
         <Col span={24}>
-          <Row justify="space-between" gutter={[0, 12]}>
+          <Row justify="space-between" gutter={[0, 24]}>
             <Col sm={24} md={14}>
               <BarChart />
             </Col>
-            <Col sm={24} md={9}>
+            <Col sm={24} md={9} style={{ width: "100%" }}>
               <PieChart
                 items={pie_chart_1_data}
                 labels={pie_chart_1_labels}
