@@ -1,113 +1,34 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
-import cls from "classnames";
-import { Switch, Badge, Avatar, Button } from "antd";
-import {
-  BellOutlined,
-  UserOutlined,
-  DownOutlined,
-  UnorderedListOutlined,
-} from "@ant-design/icons";
-
-import ProfilePopup from "@components/ProfilePopup/profile-popup";
-
-import logo from "@assets/mini_logo.svg";
-import HeaderPopup from "@components/HeaderPopup/header-popup";
+import SelectSite from "./SelectSite";
+import Notification from "./Notification";
+import UserActions from "./UserActions";
+import { logoICON } from "@assets/icons";
 
 import "./index.less";
 
-export default function Navbar() {
-  const popupRef = React.useRef();
-  const toggleRef = React.useRef();
-
-  const [visiblePopup, setVisiblePopup] =
-    React.useState(false);
-  const [visibleHeaderPopup, setVisibleHeaderPopup] =
-    React.useState(false);
-
-  const handleVisiblePopup = () => {
-    setVisiblePopup((prevState) => !prevState);
-  };
-
-  const handleHeaderVisiblePopup = () => {
-    setVisibleHeaderPopup((prevState) => !prevState);
-  };
-
-  const handleOutsideClick = (event) => {
-    let path =
-      event.path ||
-      (event.composedPath && event.composedPath());
-    if (
-      !path.includes(popupRef.current) &&
-      !path.includes(toggleRef.current)
-    ) {
-      setVisiblePopup(false);
-    }
-  };
-
-  React.useEffect(() => {
-    document.body.addEventListener(
-      "click",
-      handleOutsideClick
-    );
-    return () => {
-      document.body.removeEventListener(
-        "click",
-        handleOutsideClick
-      );
-    };
-  }, []);
+export default function TopNavbar({ viewMode }) {
+  const history = useHistory();
 
   return (
-    <header className="page-template__navbar">
-      <div className="header">
-        <div className="header__inner">
-          <img className="header__logo" src={logo} alt="" />
+    <header className="top-navbar">
+      <div
+        className="top-navbar__logo"
+        onClick={() => history.push("/")}
+      >
+        <img src={logoICON} alt="site-logo" />
+      </div>
 
-          <Button
-            onClick={handleHeaderVisiblePopup}
-            type="primary"
-            className="header__button"
-          >
-            {" "}
-            <UnorderedListOutlined />{" "}
-          </Button>
-          {visibleHeaderPopup && <HeaderPopup />}
-
-          <div className="header__content">
-            <Switch defaultChecked className="switch" />
-            <div className="header__site"> devel.kz </div>
-
-            <Badge count={1} className="badge">
-              <BellOutlined />
-            </Badge>
-
-            <div
-              className="header__user"
-              onClick={handleVisiblePopup}
-              ref={toggleRef}
-            >
-              <Avatar
-                size="large"
-                className="avatar"
-                icon={<UserOutlined />}
-              />
-              <div className="header__user-name">
-                {" "}
-                Нурлан А.{" "}
-              </div>
-              <DownOutlined
-                className={cls("header__toggle", {
-                  "active": visiblePopup,
-                })}
-              />
-
-              <div ref={popupRef}>
-                {visiblePopup && <ProfilePopup />}
-              </div>
-            </div>
-          </div>
+      <div className="top-navbar__actions">
+        <div
+          className={`actions__switch-mode-btn actions__switch-mode-btn--${viewMode}`}
+        >
+          <div className="switch-mode-btn__ball"></div>
         </div>
+        <SelectSite className="actions__select-site-btn" />
+        <Notification className="actions__notification" />
+        <UserActions className="actions__user-actions" />
       </div>
     </header>
   );

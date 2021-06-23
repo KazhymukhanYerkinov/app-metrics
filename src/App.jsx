@@ -1,3 +1,10 @@
+import React from "react";
+import { Route } from "react-router-dom";
+
+import { useDispatch, useSelector } from "react-redux";
+import { initializeApp } from "@redux/app-reducer";
+import { selectInitialize } from "./selectors/app-selector";
+
 import {
   Main,
   OldMain,
@@ -6,17 +13,11 @@ import {
   TestApi,
   TestIframe,
   TestX,
+  Heatmap,
+  Visitors,
 } from "@pages";
 
-import { Heatmap, Visitors } from "@pages";
-
-import { initializeApp } from "@redux/app-reducer";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route } from "react-router";
-
 import "./App.less";
-import { selectInitialize } from "./selectors/app-selector";
 
 const App = () => {
   const dispatch = useDispatch();

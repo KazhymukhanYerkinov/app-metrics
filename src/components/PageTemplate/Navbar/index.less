@@ -1,86 +1,75 @@
-.header {
-  padding: 0 30px;
+.top-navbar {
+  width: 100%;
+  height: 7.5vh;
+  padding: 0.25rem 1.75rem;
+  border-bottom: 2px solid rgba(52, 71, 104, 1);
+  background: rgba(42, 55, 93, 1);
 
-  height: 12vh;
-  background-color: #2a375d;
-  border-bottom: 2px solid #344768;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  @media (max-width: 600px) {
-    padding: 0 10px;
-    height: 8vh;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
 
-  &__inner {
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    position: relative;
-  }
   &__logo {
-    @media (max-width: 700px) {
-      display: block;
-      width: 100px;
-    }
-  }
-
-  &__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @media (max-width: 600px) {
-      display: none;
-    }
-  }
-
-  &__user {
-    margin-left: 20px;
-
-    display: flex;
-    align-items: center;
+    width: 10rem;
+    height: 100%;
     cursor: pointer;
 
-    position: relative;
-  }
-
-  &__site {
-    margin: 0 20px;
-
-    padding: 12px 20px;
-
-    font-size: 14px;
-    line-height: 17px;
-    color: #fff;
-    border-radius: 5px;
-
-    background-color: #324068;
-  }
-  &__user-name {
-    margin: 0 15px;
-
-    font-size: 16px;
-    line-height: 21px;
-    color: #fff;
-  }
-
-  &__toggle {
-    color: #fff;
-
-    transition: transform 0.3s linear;
-
-    &.active {
-      transform: rotate(180deg);
+    [alt="site-logo"] {
+      width: inherit;
+      height: inherit;
     }
   }
 
-  &__button {
-    display: none;
+  &__actions {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    @media (max-width: 600px) {
-      display: block;
+    [class*="actions"]:not(:last-child) {
+      margin-right: 1.25rem;
+    }
+
+    .actions__switch-mode-btn {
+      width: 60px;
+      height: 65%;
+      border-radius: 20px;
+      background: #fff;
+      position: relative;
+
+      &--light {
+        [class*="ball"] {
+          left: 5%;
+        }
+      }
+      &--dark {
+        [class*="ball"] {
+          left: 55%;
+        }
+      }
+
+      [class*="ball"] {
+        width: 24px;
+        height: 24px;
+        // width: 1.45rem;
+        // height: 1.45rem;
+        border-radius: 50%;
+        background: rgba(42, 55, 93, 1);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+      }
+    }
+    .actions__select-site-btn {
+    }
+    .actions__notification {
+    }
+    .actions__user-actions {
     }
   }
 }

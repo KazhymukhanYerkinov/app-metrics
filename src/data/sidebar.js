@@ -11,5 +11,4 @@ export const sidebar = [
     {id: 3, image: <Diagnos />, name: 'Diagnostics', url: 'diagnos'},
     {id: 4, image: <Guides />, name: 'Guides', url: 'guides'},
     {id: 5, image: <Settings />, name: 'Settings', url: 'settings'},
-
 ]

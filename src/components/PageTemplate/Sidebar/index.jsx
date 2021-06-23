@@ -1,85 +1,73 @@
-import React from "react";
+import React, { useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+
+import shortid from "shortid";
+
 import { sidebar as sidebarItems } from "@data/sidebar";
+import { sidebarCollapsedContext } from "@components/PageTemplate";
 
 import "./index.less";
 
 export default function Sidebar() {
-  const [sidebarHeight, setSidebarHeight] =
-    React.useState(0);
+  const { sidebarCollapsed } = useContext(
+    sidebarCollapsedContext
+  );
+  const history = useHistory();
 
-  function calcSidebarHeight() {
-    const { height: navbarHeight } = document
-      .querySelector(
-        "header[class='page-template__navbar']"
-      )
-      .getBoundingClientRect();
+  return sidebarCollapsed ? (
+    <aside className="sidebar">
+      <ul className="sidebar__list">
+        {sidebarItems.map((el) => (
+          <li
+            key={shortid.generate()}
+            className="list-item"
+            onClick={() => history.push(el.url)}
+          >
+            {el.image}
+            <NavLink
+              className="list-item__text"
+              to={el.url}
+            >
+              {el.name}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
 
-    const { height: pageTemplateHeight } = document
-      .querySelector("div[class='page-template']")
-      .getBoundingClientRect();
-
-    setSidebarHeight(pageTemplateHeight - navbarHeight);
-  }
-
-  React.useState(() => {
-    window.addEventListener("load", calcSidebarHeight);
-    window.addEventListener("resize", calcSidebarHeight);
-    return () => {
-      window.removeEventListener("load", calcSidebarHeight);
-      window.removeEventListener(
-        "resize",
-        calcSidebarHeight
-      );
-    };
-  });
-
-  return (
-    <aside
-      className="page-template__sidebar"
-      style={{ height: sidebarHeight }}
-    >
-      <div className="sidebar">
-        <div className="sidebar__inner">
-          <div className="sidebar__items">
-            {sidebarItems.map((item, index) => (
-              <div key={index} className="sidebar__item">
-                <div className="sidebar__item--image">
-                  {" "}
-                  {item.image}{" "}
-                </div>
-                <div className="sidebar__item--name">
-                  {" "}
-                  {item.name}{" "}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="sidebar__pay">
-            <div className="sidebar__pay--inner">
-              <div className="sidebar__credits">
-                <div> Credits </div>
-                <div> 993 </div>
-              </div>
-
-              <div className="sidebar__plan">
-                <div> Plan </div>
-                <div> Free </div>
-              </div>
-
-              <div className="sidebar__refill">
-                <div> Next refill </div>
-                <div> 7 days </div>
-              </div>
-
-              <button className="sidebar__button">
-                {" "}
-                Upgrade plan{" "}
-              </button>
-            </div>
-          </div>
+      <div className="sidebar__plan-box">
+        <ul className="plan-box__list">
+          <li className="list-item">
+            <h3 className="list-item__title">Credits</h3>
+            <p className="list-item__text">993</p>
+          </li>
+          <li className="list-item">
+            <h3 className="list-item__title">Plan</h3>
+            <p className="list-item__text">Free</p>
+          </li>
+          <li className="list-item">
+            <h3 className="list-item__title">Next</h3>
+            <p className="list-item__text">7 days</p>
+          </li>
+        </ul>
+        <div className="plan-box__upgrade-btn">
+          Upgrade plan
         </div>
       </div>
+    </aside>
+  ) : (
+    <aside className="sidebar sidebar--collapsed">
+      <ul className="sidebar__list">
+        {sidebarItems.map((el) => (
+          <li
+            key={shortid.generate()}
+            className="list-item"
+            onClick={() => history.push(el.url)}
+            title={el.name}
+          >
+            {el.image}
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }

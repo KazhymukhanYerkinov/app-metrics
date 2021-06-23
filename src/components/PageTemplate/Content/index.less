@@ -1,7 +1,23 @@
-.page-template__content {
-  width: inherit;
-  height: inherit;
+.content {
+  position: fixed;
+  top: 7.5vh;
+  left: 15%;
+  z-index: -1;
+
+  width: 85%;
+  height: calc(100vh - 7.5vh);
   overflow: hidden auto;
   padding: 1.5rem;
   background: rgba(42, 55, 93, 1);
+
+  &--full {
+    width: 95%;
+    left: 5%;
+  }
+
+  &--mobile {
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
 }
