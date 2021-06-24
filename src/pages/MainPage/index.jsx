@@ -6,7 +6,14 @@ import { PageTemplate } from "@components";
 import "./index.less";
 
 export const MainPage = () => {
-  return <PageTemplate></PageTemplate>;
+  return (
+    <PageTemplate>
+      <>
+        <div className="">Main Page</div>
+        <button>Open Popup</button>
+      </>
+    </PageTemplate>
+  );
 };
 
 const mapStateToProps = () => ({});
