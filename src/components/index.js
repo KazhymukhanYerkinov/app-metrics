@@ -11,7 +11,10 @@ export { default as Sidebar } from "./Sidebar/sidebar";
 
 // Yernar Components ↓
 export { default as PageTemplate } from "@components/PageTemplate";
+// old popup
 export { default as Popups } from "@components/Popups";
+// new popup
+export { default as Popup } from "@components/Popup";
 export { default as TestXChart } from "@components/TestXChart";
 export { default as TrafficOverviewChart } from "@components/TrafficOverviewChart";
 export { default as GoogleAdsCard } from "@components/GoogleAdsCard";

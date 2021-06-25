@@ -21,9 +21,6 @@ const BottomNavigationBar = lazy(() =>
 const Content = lazy(() =>
   import("@components/PageTemplate/Content")
 );
-const Popup = lazy(() =>
-  import("@components/PageTemplate/Popup")
-);
 
 export const sidebarCollapsedContext = createContext();
 
@@ -82,7 +79,6 @@ function PageTemplate({ app: { viewMode }, children }) {
               <BottomNavigationBar viewMode={viewMode} />
             </>
           )}
-          <Popup />
         </Suspense>
       </sidebarCollapsedContext.Provider>
     </div>

@@ -38,4 +38,8 @@ export const initializeApp = () => (dispatch) => {
   });
 };
 
+// export const changeModeAction = (viewMode) => {
+//   return {type: CHANGE_VIEW_MODE, data: viewMode}
+// }
+
 export default appReducer;

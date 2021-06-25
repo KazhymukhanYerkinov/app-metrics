@@ -3,7 +3,10 @@ import { sidebarCollapsedContext } from "@components/PageTemplate";
 
 import "./index.less";
 
-export default function Content({ className, children }) {
+export default function Content({
+  className = "",
+  children,
+}) {
   const { sidebarCollapsed } = useContext(
     sidebarCollapsedContext
   );
